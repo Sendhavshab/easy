@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TypingBox from "./TypingBox";
 import Stats from "./Starts";
 import Highlight from "./Highlight";
+import WPM from "./WPM";
 
 const App = () => {
   const [inputText, setInputText] = useState("");
@@ -38,6 +39,7 @@ const App = () => {
           correctWords={correctWords}
           incorrectWords={incorrectWords}
         />
+        <WPM inputText={inputText} />
       </div>
     </div>
   );
