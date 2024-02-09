@@ -30,10 +30,12 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="px-5 bg-slate-600 w-screen h-screen">
+      <h2 className="text-3xl">
+        tumhe <span className="text-yellow-500">asdf ;lkj</span> type karna he{" "}
+      </h2>
       <Highlight userInput={inputText} />
       <div>
-        <TypingBox value={inputText} onChange={handleInputChange} />
         <Stats
           wordsTyped={wordsTyped}
           correctWords={correctWords}
@@ -41,6 +43,7 @@ const App = () => {
         />
         <WPM inputText={inputText} />
       </div>
+      <TypingBox value={inputText} onChange={handleInputChange} />
     </div>
   );
 };
