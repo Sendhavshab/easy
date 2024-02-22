@@ -1,3 +1,4 @@
+// WPM.js
 import React, { useState, useEffect } from "react";
 
 const WPM = ({ inputText }) => {
@@ -10,7 +11,10 @@ const WPM = ({ inputText }) => {
       if (!startTime) {
         setStartTime(Date.now());
       }
-      const typedWords = inputText.trim().split(" ");
+      const typedWords = inputText
+        .trim()
+        .split(" ")
+        .filter((word) => word !== "");
       const totalWords = typedWords.length;
       setWordsTyped(totalWords);
     }
@@ -32,14 +36,14 @@ const WPM = ({ inputText }) => {
   }, [startTime, wordsTyped]);
 
   return (
-    <div>
+    <div className="text-center mb-6">
       {inputText.trim() !== "" ? (
         <div>
-          <div className="text-xl">Words Typed: {wordsTyped}</div>
-          <div className="text-xl">WPM: {wpm}</div>
+          <p className="text-lg">Words Typed: {wordsTyped}</p>
+          <p className="text-lg">WPM: {wpm}</p>
         </div>
       ) : (
-        <div className="text-xl">Start typing to see WPM</div>
+        <p className="text-lg">Start typing to see WPM</p>
       )}
     </div>
   );
