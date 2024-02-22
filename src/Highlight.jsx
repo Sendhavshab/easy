@@ -1,6 +1,6 @@
 import React from "react";
 
-const Highlight = ({ userInput }) => {
+const Highlight = ({ userInput , userWord }) => {
   // User input string
   const inputString = userInput || "";
 
@@ -9,9 +9,9 @@ const Highlight = ({ userInput }) => {
 
   // Function to determine if a word is correct or incorrect
   const isCorrectWord = (word) => {
-    return word === "asdf" || word === ";lkj";
+    return word === userWord;
   };
-
+      
   // Function to render highlighted word
   const renderHighlightedWord = (word, index) => {
     const style = isCorrectWord(word) ? { color: "blue" } : { color: "red" };
