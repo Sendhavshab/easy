@@ -1,4 +1,3 @@
-// WPM.js
 import React, { useState, useEffect } from "react";
 
 const WPM = ({ inputText }) => {
@@ -18,7 +17,7 @@ const WPM = ({ inputText }) => {
       const totalWords = typedWords.length;
       setWordsTyped(totalWords);
     }
-  }, [inputText, startTime]);
+  }, [inputText]);
 
   useEffect(() => {
     const calculateWPM = () => {
@@ -27,8 +26,9 @@ const WPM = ({ inputText }) => {
         return;
       }
       const endTime = Date.now();
-      const totalTimeInMinutes = (endTime - startTime) / 60000; // Convert milliseconds to minutes
-      const wordsPerMinute = Math.round(wordsTyped / totalTimeInMinutes);
+      const totalTimeInSeconds = (endTime - startTime) / 1000; // Convert milliseconds to seconds
+      const wordsPerSecond = wordsTyped / totalTimeInSeconds;
+      const wordsPerMinute = Math.round(wordsPerSecond * 60); // Convert words per second to words per minute
       setWPM(wordsPerMinute);
     };
 
@@ -36,11 +36,11 @@ const WPM = ({ inputText }) => {
   }, [startTime, wordsTyped]);
 
   return (
-    <div className="text-center mb-6">
+    <div className="text-center md:mb-6">
       {inputText.trim() !== "" ? (
         <div>
-          <p className="text-lg">Words Typed: {wordsTyped}</p>
-          <p className="text-lg">WPM: {wpm}</p>
+          
+          <p className="md:text-lg inline-block md:block ">WPM: {wpm}</p>
         </div>
       ) : (
         <p className="text-lg">Start typing to see WPM</p>
