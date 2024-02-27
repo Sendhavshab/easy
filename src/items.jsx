@@ -1,4 +1,5 @@
-export const items = [{
+export const items = [
+  {
   "id": 8,
   "title": "Microsoft Surface Laptop 4",
   "description": "Style and speed. Stand out on ...",

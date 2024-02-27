@@ -2,14 +2,17 @@ import React from "react";
 import { MdOutlineShoppingBag } from "react-icons/md";
 function Header() {
   return (
-    <div className="flex w-full h-14 bg-white p-2">
+    <div className="flex w-full h-16 bg-white p-2 mb-10 relative ">
       <img
+        className="hover:transform hover:scale-110 transition duration-300 ease-in-out"
         src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"
         alt="logo"
       />
-      <MdOutlineShoppingBag size={32} className="absolute right-10" />
+      <MdOutlineShoppingBag
+        size={34}
+        className=" absolute right-10 top-2  hover:transform hover:scale-125 transition duration-300 ease-in-out"
+      />
     </div>
   );
 }
 export default Header;
-
