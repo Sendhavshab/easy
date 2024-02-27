@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomBTNOne from "./Button/ButtonOne";
 import { useState } from "react";
 import CustomBTNTwo from "./Button/Buttontwo";
 
 
-function LavelsComponent({ func, showBtn, setShowBtn , setI }) {
+function LavelsComponent({ func, showBtn, setShowBtn , setI ,I }) {
     
-    const [custemButtonChildren , setcCustemButtonChildren] = useState("PRACTICE BY LAVELS")
-    const[bysequence ,setSequence] = useState(false)
-
+    const [custemButtonChildren , setCustemButtonChildren] = useState("PRACTICE BY LAVELS")
+    
+ 
   function ShowLavels() {
     setShowBtn(!showBtn);
- if(custemButtonChildren == "PRACTICE BY LAVELS"){
-    setcCustemButtonChildren("TYPE BY INPUT");
- }else{
-    setcCustemButtonChildren("PRACTICE BY LAVELS");
- }
-  }
 
+  }
+useEffect( function (){
+  if (showBtn) {
+    setCustemButtonChildren("TYPE BY INPUT");
+  } else if (!showBtn) {
+    setCustemButtonChildren("PRACTICE BY LAVELS");
+  }
+}
+  ,[showBtn , I])
 
 function LavelOne() {
  
@@ -30,20 +33,63 @@ function LavelTwo() {
   func(["asdfgf", ";lkjhj"]);
   setI(true);
 }
+function HomeRow() {
+  func([
+    "all;",
+    "ash;",
+    "ask;",
+    "add;",
+    "has;",
+    "had;",
+    "sad;",
+    "lad;",
+    "kad;",
+    "lash;",
+    "gas;",
+    "glass;",
+    "jag;",
+    "fad;",
+    "dad;",
+    "daldar;",
+    "sag;",
+    "gad;",
+    "gal;",
+    "shad;",
+    "fag;",
+    "lag;",
+    "dash;",
+    "lash;",
+    "jag;",
+    "dag;",
+    "gash;",
+    "shag;",
+    "shakal;",
+    "jagl;",
+    "salad;",
+    "slag;",
+    "flask;",
+    "jagd;",
+    "ladka;",
+  ]);
+  setI(true);
+}
   return (
     <div>
       <CustomBTNOne onClick={ShowLavels}>{custemButtonChildren}</CustomBTNOne>
       {showBtn === true ? (
         <div>
-          <CustomBTNTwo func={setSequence} onClick={LavelOne}>
-            Lavel 1 - asdf ;lkj
-          </CustomBTNTwo>
-          <CustomBTNTwo func={setSequence} onClick={LavelTwo}>
-            Lavel 2 - asdfgf ;lkjhj
-          </CustomBTNTwo>
+          <div>
+            <CustomBTNTwo onClick={LavelOne}>Lavel 1 - asdf ;lkj</CustomBTNTwo>
+            <CustomBTNTwo onClick={LavelTwo}>
+              Lavel 2 - asdfgf ;lkjhj
+            </CustomBTNTwo>
+            <CustomBTNTwo onClick={HomeRow}>
+              Lavel 3 - HOME ROW PRACTICE
+            </CustomBTNTwo>
+          </div>
         </div>
       ) : (
-        <div></div>
+        true
       )}
     </div>
   );

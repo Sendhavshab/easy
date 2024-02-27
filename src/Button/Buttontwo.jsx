@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const CustomBTNTwo = ({ onClick, children, className, func }) => {
+const CustomBTNTwo = ({ onClick, children, className }) => {
   return (
     <div>
       <button

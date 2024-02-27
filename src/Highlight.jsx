@@ -20,7 +20,7 @@ const Highlight = ({ userInput, userWord }) => {
   };
 
   return (
-    <div>{words.map((word, index) => renderHighlightedWord(word, index))}</div>
+    <div className="font-bold md:text-lg">{words.map((word, index) => renderHighlightedWord(word, index))}</div>
   );
 };
 
