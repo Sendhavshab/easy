@@ -5,8 +5,7 @@ const Highlight = ({ userInput, userWord }) => {
   const words = inputString.split(/\s+/);
 
   const isCorrectWord = (word) => {
-    console.log("word is ", word);
-     console.log("userword is ",userWord);
+   
     
      return userWord.includes(word);
   };
