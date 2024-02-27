@@ -1,18 +1,15 @@
 import React from "react";
 
-const Highlight = ({ userInput }) => {
-  // User input string
+const Highlight = ({ userInput, userWord }) => {
   const inputString = userInput || "";
-
-  // Splitting user input into words
   const words = inputString.split(/\s+/);
 
-  // Function to determine if a word is correct or incorrect
   const isCorrectWord = (word) => {
-    return word === "asdf" || word === ";lkj";
+   
+    
+     return userWord.includes(word);
   };
 
-  // Function to render highlighted word
   const renderHighlightedWord = (word, index) => {
     const style = isCorrectWord(word) ? { color: "blue" } : { color: "red" };
     return (
@@ -22,7 +19,6 @@ const Highlight = ({ userInput }) => {
     );
   };
 
-  // Render
   return (
     <div>{words.map((word, index) => renderHighlightedWord(word, index))}</div>
   );

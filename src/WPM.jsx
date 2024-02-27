@@ -10,11 +10,14 @@ const WPM = ({ inputText }) => {
       if (!startTime) {
         setStartTime(Date.now());
       }
-      const typedWords = inputText.trim().split(" ");
+      const typedWords = inputText
+        .trim()
+        .split(" ")
+        .filter((word) => word !== "");
       const totalWords = typedWords.length;
       setWordsTyped(totalWords);
     }
-  }, [inputText, startTime]);
+  }, [inputText]);
 
   useEffect(() => {
     const calculateWPM = () => {
@@ -23,8 +26,9 @@ const WPM = ({ inputText }) => {
         return;
       }
       const endTime = Date.now();
-      const totalTimeInMinutes = (endTime - startTime) / 60000; // Convert milliseconds to minutes
-      const wordsPerMinute = Math.round(wordsTyped / totalTimeInMinutes);
+      const totalTimeInSeconds = (endTime - startTime) / 1000; // Convert milliseconds to seconds
+      const wordsPerSecond = wordsTyped / totalTimeInSeconds;
+      const wordsPerMinute = Math.round(wordsPerSecond * 60); // Convert words per second to words per minute
       setWPM(wordsPerMinute);
     };
 
@@ -32,14 +36,14 @@ const WPM = ({ inputText }) => {
   }, [startTime, wordsTyped]);
 
   return (
-    <div>
+    <div className="text-center md:mb-6">
       {inputText.trim() !== "" ? (
         <div>
-          <div>Words Typed: {wordsTyped}</div>
-          <div>WPM: {wpm}</div>
+          
+          <p className="md:text-lg inline-block md:block ">WPM: {wpm}</p>
         </div>
       ) : (
-        <div>Start typing to see WPM</div>
+        <p className="text-lg">Start typing to see WPM</p>
       )}
     </div>
   );
