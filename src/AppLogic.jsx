@@ -3,7 +3,7 @@ import TypingBox from "./TypingBox";
 import Stats from "./Starts";
 import Highlight from "./Highlight";
 import WPM from "./WPM";
-import UserInput from "./input";
+import UserInput from "./UserInput";
 import Timer from "./Timer";
 import LavelsComponent from "./Lavels";
 import CustomBTNthree from "./Button/ButtonThree";
