@@ -38,7 +38,7 @@ const AppLogic = () => {
   }
 
   const handleInputChange = (event) => {
-    const inputValue = event.target.value;
+    const inputValue = event.target.value.toLowerCase();
     setInputText(inputValue);
     localStorage.setItem("inputText", inputValue);
     const typedWords = inputValue.trim().split(" ");
@@ -81,11 +81,12 @@ const AppLogic = () => {
           setShowBtn={setShowBtn}
           showBtn={showBtn}
           setI={setI}
+          I={i}
         />
         {showBtn === false ? (
           <UserInput setI={setI} func={UserWords} result={result}></UserInput>
         ) : (
-          <div></div>
+          true
         )}
       </div>
     );
@@ -119,21 +120,20 @@ const AppLogic = () => {
   }
 
   return (
-    <div className="px-5  w-screen h-screen ">
+    <div className="px-5  w-screen h-screen md:mt-6 ">
       <IoMdArrowRoundBack
         onClick={setIchange}
         className="fixed left-0 top-3"
         size={40}
       />
       <Timer />
-      <h2 className="text-3xl mb-4 py-4 hading-font">
+      <Highlight userInput={inputText} userWord={userWord} />
+      <h2 className="text-3xl mb-4 hading-font">
         Tumhe
-        <span className="text-blue-500 transition duration-500 ease-in-out transform hover:scale-110">
-          {result}
-        </span>
+        <span className="text-blue-500">{result}</span>
         type karna hai
       </h2>
-      <Highlight userInput={inputText} userWord={userWord} />
+
       <div className="md:mt-4">
         <WPM inputText={inputText} />
         <Stats

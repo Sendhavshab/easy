@@ -18,7 +18,8 @@ const UserInput = ({ func, setI, result }) => {
   }, [userWords]); // Update local storage whenever userWords changes
 
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+    const inputValue = event.target.value.toLowerCase();
+    setInputValue(inputValue);
   };
 
   const confirmBtn = () => {
@@ -42,9 +43,16 @@ const UserInput = ({ func, setI, result }) => {
     localStorage.removeItem("userWords");
     setUserWords("");
   };
+ 
+
+  
+
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4">
+    <div
+      
+      className="flex flex-col items-center justify-center space-y-4"
+    >
       <input
         className="border border-gray-300 rounded-md px-3 py-2"
         type="text"
@@ -53,7 +61,7 @@ const UserInput = ({ func, setI, result }) => {
         placeholder="Enter word"
       />
       <CustomBTNfour onClick={handleAddWord}>Add Word</CustomBTNfour>
-     6
+
       <p className="text-lg">User Words: {result}</p>
       <button
         className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"

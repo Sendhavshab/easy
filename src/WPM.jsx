@@ -40,10 +40,10 @@ const WPM = ({ inputText }) => {
       {inputText.trim() !== "" ? (
         <div>
           
-          <p className="md:text-lg inline-block md:block ">WPM: {wpm}</p>
+          <p className="md:text-lg inline-block md:block font-bold">WPM: {wpm}</p>
         </div>
       ) : (
-        <p className="text-lg">Start typing to see WPM</p>
+        <p className="text-lg font-bold">Start typing to see WPM</p>
       )}
     </div>
   );
