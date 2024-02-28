@@ -3,13 +3,15 @@ import Header from "./Header";
 import ProductList from "./ProductList";
 import { items } from "./Items";
 import Footer from "./Footer";
+import ProductDetails from "./ProductDetail";
 
 function App() {
   return (
     <div className="bg-gray-200  h-screen overflow-auto ">
       <Header></Header>
-      <ProductList param={items}></ProductList>
+      <ProductList allItems={items}></ProductList>
       <Footer />
+      
     </div>
   );
 }
