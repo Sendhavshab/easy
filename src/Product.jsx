@@ -1,11 +1,11 @@
 import React from "react";
 
 function Product({ items }) {
-  console.log("items is ", items, "title is ", items.title);
+
   return (
     <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
-      <div className="max-h-96 overflow-hidden">
-        <img className="w-full inset-0 object-cover " src={items.thumbnail} />
+      <div className="h-96 overflow-hidden">
+        <img className="w-full " src={items.thumbnail} />
       </div>
 
       <h3 className="font-bold text-xs sm:text-base ">
@@ -24,3 +24,4 @@ function Product({ items }) {
 }
 
 export default Product;
+ 
