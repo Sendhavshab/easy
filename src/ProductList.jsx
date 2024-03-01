@@ -52,9 +52,11 @@ function ProductList({ allItems, setdataChanger }) {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
             return (
-              <Link to={`/Product/${items.id}`} key={items.id}>
+             
+              
                 <Product items={items} key={index} />
-              </Link>
+              
+             
             );
           })}
         </div>
