@@ -1,28 +1,40 @@
 import react from "react";
 import { useState } from "react";
 import CustomBTNFour from "./Button/ButtonFour";
-function ProductDetails({ param, id }) {
-  const [AddToCartInput, setAddToCartInput] = useState(1);
-  const object = {
-    8: param[0],
-    12: param[1],
-    10: param[2],
-    9: param[3],
-    11: param[4],
-  };
+import { Link, useParams } from "react-router-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
-  const items = object[id];
+function ProductDetails({ allData }) {
+  const [AddToCartInput, setAddToCartInput] = useState(1);
+
+  const { id } = useParams();
+  console.log(id, "id", allData[1].id);
+  let product;
+  for (let i = 0; i < allData.length; i++) {
+    console.log(allData[i].id, "data length", allData.length);
+    if (id == allData[i].id) {
+      product = allData[i];
+      break;
+    }
+  }
+
+  const items = product;
 
   function AddToCartInputChange(event) {
+    console.log("AddToCartInputChange");
     let changToNum = +event.target.value;
-    if(changToNum === 0){
-       changToNum = "";
+    if (changToNum === 0) {
+      changToNum = "";
     }
     setAddToCartInput(changToNum);
   }
-  console.log("AddToCartInputChange");
+
   return (
     <div>
+      <Link to="/">
+        <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
+      </Link>
+
       <div
         className="bg-white p-2 border md:flex min-h-96  rounded-md shadow-xl m-12 lg:m-auto "
         style={{ maxWidth: "944px" }}

@@ -31,7 +31,7 @@ function ProductList({ allItems, setdataChanger }) {
   }
   return (
     <div className="lg:px-10 ">
-      <div className="md:bg-slate-50">
+      <div className="md:bg-gray-100">
         <input
           placeholder="search"
           className="border-2 border-gray-600 rounded-md md:rounded-xl w-20 md:w-40 px-3 md:py-1 hover:transform hover:scale-105 transition duration-300 ease-in-out m-2"
@@ -49,10 +49,10 @@ function ProductList({ allItems, setdataChanger }) {
           <option value={"default"}> default Filter</option>
           <option value={"category"}>Sort by category </option>
         </select>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5  md:bg-slate-50 py-6 px-5 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
             return (
-              <Link to={`/Product/${items.id}`} onClick={setdataChanger}>
+              <Link to={`/Product/${items.id}`} key={items.id}>
                 <Product items={items} key={index} />
               </Link>
             );
@@ -63,4 +63,3 @@ function ProductList({ allItems, setdataChanger }) {
   );
 }
 export default ProductList;
- 

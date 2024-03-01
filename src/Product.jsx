@@ -4,7 +4,7 @@ function Product({ items }) {
 
   return (
     <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
-      <div className="h-96 overflow-hidden">
+      <div className="max-h-96 overflow-hidden">
         <img className="w-full " src={items.thumbnail} />
       </div>
 
