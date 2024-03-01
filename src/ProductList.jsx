@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { Link } from "react-router-dom";
 import { GetProductList } from "./ServerData";
 
 function ProductList() {
