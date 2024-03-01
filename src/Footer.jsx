@@ -1,9 +1,9 @@
 import React from "react";
-import CustomBTNOne, { Anchor } from "./ButtonOne";
+import CustomBTNOne, { Anchor } from "./Button/ButtonOne";
 
 function Footer() {
   return (
-    <div className=" w-full h-40 md:h-16 mt-3 bg-gray-600 p-2  relative shadow-lg">
+    <div className=" w-full h-40 md:h-16 mt-3 bg-gray-600  relative shadow-lg">
       <div className="md:absolute top-4 ">
         <div className="flex justify-evenly md:inline-block">
           <Anchor src="">HOME</Anchor>
