@@ -6,14 +6,19 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 function ProductDetails({ allData }) {
   const [AddToCartInput, setAddToCartInput] = useState(1);
+  const [product, setProduct] = useState([]);
 
   const { id } = useParams();
   console.log(id, "id", allData[1].id);
-  let product;
+
   for (let i = 0; i < allData.length; i++) {
     console.log(allData[i].id, "data length", allData.length);
     if (id == allData[i].id) {
-      product = allData[i];
+      const contant = allData[i];
+      if (contant == product) {
+        break;
+      }
+      setProduct(contant);
       break;
     }
   }
@@ -27,6 +32,20 @@ function ProductDetails({ allData }) {
       changToNum = "";
     }
     setAddToCartInput(changToNum);
+  }
+  console.log("product is ", product, product == []);
+  if (product.length == 0) {
+    console.log("product is he ", product);
+    return (
+      <div className="flext flex-col items-center justify-center lg:h-3/4 ">
+        <h1 className="text-3xl font-bold m-10 "> opps ! 🤦‍♀️ Item Not found</h1>
+        <Link to="/">
+          <CustomBTNFour className="rounded-2xl px-2 m-10">
+            Go Back
+          </CustomBTNFour>
+        </Link>
+      </div>
+    );
   }
 
   return (
