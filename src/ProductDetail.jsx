@@ -1,20 +1,26 @@
-import react from "react";
-import { useState } from "react";
+
+import React , { useState, useEffect } from "react";
 import CustomBTNFour from "./Button/ButtonFour";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
-
-function ProductDetails({ allData }) {
+import { GetOneProduct } from "./ServerData";
+function ProductDetails() {
   const [AddToCartInput, setAddToCartInput] = useState(1);
   const [product, setProduct] = useState([]);
+  const [OneItemArr, SetOneItemArr] = useState([]);
+
+      useEffect(function () {
+        const data = GetOneProduct();
+        SetOneItemArr(data);
+      }, []);
 
   const { id } = useParams();
-  console.log(id, "id", allData[1].id);
+  
 
-  for (let i = 0; i < allData.length; i++) {
-    console.log(allData[i].id, "data length", allData.length);
-    if (id == allData[i].id) {
-      const contant = allData[i];
+  for (let i = 0; i < OneItemArr.length; i++) {
+    console.log(OneItemArr[i].id, "data length", OneItemArr.length);
+    if (id == OneItemArr[i].id) {
+      const contant = OneItemArr[i];
       if (contant == product) {
         break;
       }

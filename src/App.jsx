@@ -38,7 +38,7 @@ function App() {
           element={
             <ProductList
               
-              allItems={items}
+              
             ></ProductList>
           }
         ></Route>

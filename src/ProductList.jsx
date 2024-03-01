@@ -1,11 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
+import { GetProductList } from "./ServerData";
 
-function ProductList({ allItems, setdataChanger }) {
+function ProductList() {
   const [Query, SetQuery] = useState("");
   const [sort, setsort] = useState("default");
+  const [allItems, SetAllItems] = useState([]);
+
+  useEffect(function () {
+    const data = GetProductList();
+    SetAllItems(data);
+  }, []);
 
   const param = allItems.filter(function (item) {
     return (
@@ -51,13 +57,7 @@ function ProductList({ allItems, setdataChanger }) {
         </select>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
-            return (
-             
-              
-                <Product items={items} key={index} />
-              
-             
-            );
+            return <Product items={items} key={index} />;
           })}
         </div>
       </div>
