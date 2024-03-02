@@ -1,58 +1,52 @@
-
-import React , { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CustomBTNFour from "./Button/ButtonFour";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GetOneProduct } from "./ServerData";
+import { FiLoader } from "react-icons/fi";
+
 function ProductDetails() {
   const [AddToCartInput, setAddToCartInput] = useState(1);
   const [product, setProduct] = useState([]);
   const [OneItemArr, SetOneItemArr] = useState([]);
 
-      useEffect(function () {
-        const data = GetOneProduct();
-        SetOneItemArr(data);
-      }, []);
-
   const { id } = useParams();
+  console.log("id is " + id);
+  useEffect(function () {
+    const data = GetOneProduct(id);
+    data.then(function (responce) {
+      setProduct(responce.data);
+
+      console.log(responce.data);
+    });
+  }, []);
   
-
-  for (let i = 0; i < OneItemArr.length; i++) {
-    console.log(OneItemArr[i].id, "data length", OneItemArr.length);
-    if (id == OneItemArr[i].id) {
-      const contant = OneItemArr[i];
-      if (contant == product) {
-        break;
-      }
-      setProduct(contant);
-      break;
-    }
-  }
-
-  const items = product;
-
   function AddToCartInputChange(event) {
+
     console.log("AddToCartInputChange");
+
     let changToNum = +event.target.value;
+
     if (changToNum === 0) {
       changToNum = "";
     }
     setAddToCartInput(changToNum);
   }
-  console.log("product is ", product, product == []);
+
+
   if (product.length == 0) {
-    console.log("product is he ", product);
     return (
-      <div className="flext flex-col items-center justify-center lg:h-3/4 ">
-        <h1 className="text-3xl font-bold m-10 "> opps ! 🤦‍♀️ Item Not found</h1>
+      <div>
         <Link to="/">
-          <CustomBTNFour className="rounded-2xl px-2 m-10">
-            Go Back
-          </CustomBTNFour>
+          <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
         </Link>
+        <div className="w-screen max-h-96 flex items-center justify-center">
+          <FiLoader className="animate-pulse h-6 w-6" />
+        </div>
       </div>
     );
   }
+
 
   return (
     <div>
@@ -65,14 +59,14 @@ function ProductDetails() {
         style={{ maxWidth: "944px" }}
       >
         <div className="overflow-hidden ">
-          <img className="w-full block p-2" src={items.thumbnail} />
+          <img className="w-full block p-2" src={product.thumbnail} />
         </div>
         <div className="flex flex-col w-96 gap-3 items-start border ">
-          <h3 className="font-bold     lg:text-2xl ">{items.title}</h3>
+          <h3 className="font-bold     lg:text-2xl ">{product.title}</h3>
 
-          <p className="font-bold  ">category :{items.category}</p>
+          <p className="font-bold  ">category :{product.category}</p>
 
-          <p className="font-bold     inline-block  ">price :{items.price}</p>
+          <p className="font-bold     inline-block  ">price :{product.price}</p>
 
           <div>
             <input

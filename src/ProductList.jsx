@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { GetProductList } from "./ServerData";
+import { FiLoader } from "react-icons/fi";
 
 function ProductList() {
   const [Query, SetQuery] = useState("");
@@ -9,7 +10,11 @@ function ProductList() {
 
   useEffect(function () {
     const data = GetProductList();
-    SetAllItems(data);
+
+    data.then((responce) => {
+      SetAllItems(responce.data.products);
+      console.log("rsponce is ", responce.data.products);
+    });
   }, []);
 
   const param = allItems.filter(function (item) {
@@ -33,6 +38,14 @@ function ProductList() {
   }
   function HandleSelectChange(event) {
     setsort(event.target.value);
+  }
+
+  if (allItems.length == 0) {
+    return (
+      <div className="w-screen h-2/3 flex items-center justify-center">
+        <FiLoader className="animate-pulse h-6 w-6" />
+      </div>
+    );
   }
   return (
     <div className="lg:px-10 ">

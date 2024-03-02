@@ -1,16 +1,17 @@
 import React from "react";
 import { items } from "./Data";
+import axios from "axios";
 
 export function GetProductList() {
 
-    return items
+    return axios.get("https://dummyjson.com/products");
 
 
 
 }
 
-export function GetOneProduct() {
+export function GetOneProduct(id) {
 
-return items
+ return axios.get("https://dummyjson.com/products/" + id);
 }
 
