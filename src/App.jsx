@@ -7,28 +7,14 @@ import ProductDetails from "./ProductDetail";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
-  
-
   return (
-    <div className="bg-gray-200 h-screen overflow-auto ">
+    <div className="bg-gray-200 h-screen overflow-scroll flex flex-col">
       <Header></Header>
 
       <Routes>
-        <Route
-          index
-          path="/"
-          element={
-            <ProductList
-              
-              
-            ></ProductList>
-          }
-        ></Route>
+        <Route index path="/" element={<ProductList></ProductList>}></Route>
 
-        <Route
-          path="/Product/:id/details"
-          element={<ProductDetails />}
-        ></Route>
+        <Route path="/Product/:id/details" element={<ProductDetails />}></Route>
       </Routes>
 
       <Footer />
