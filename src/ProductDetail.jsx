@@ -1,32 +1,53 @@
-import react from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomBTNFour from "./Button/ButtonFour";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { GetOneProduct } from "./ServerData";
+import { FiLoader } from "react-icons/fi";
 
-function ProductDetails({ allData }) {
+import NextBackBtn from "./NextBackBtn";
+function ProductDetails() {
   const [AddToCartInput, setAddToCartInput] = useState(1);
+  const [product, setProduct] = useState([]);
+  const [OneItemArr, SetOneItemArr] = useState([]);
 
-  const { id } = useParams();
-  console.log(id, "id", allData[1].id);
-  let product;
-  for (let i = 0; i < allData.length; i++) {
-    console.log(allData[i].id, "data length", allData.length);
-    if (id == allData[i].id) {
-      product = allData[i];
-      break;
-    }
-  }
+  const  id  = +(useParams().id);
+  console.log("id is " + id);
 
-  const items = product;
+
+  useEffect(function () {
+    const data = GetOneProduct(id);
+    data.then(function (responce) {
+      setProduct(responce.data);
+
+      console.log(responce.data);
+    });
+  }, [id]);
 
   function AddToCartInputChange(event) {
     console.log("AddToCartInputChange");
+
     let changToNum = +event.target.value;
+
     if (changToNum === 0) {
       changToNum = "";
     }
     setAddToCartInput(changToNum);
+  }
+
+  
+
+  if (product.length == 0) {
+    return (
+      <div>
+        <Link to="/">
+          <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
+        </Link>
+        <div className="w-screen max-h-96 flex items-center justify-center">
+          <FiLoader className="animate-pulse h-6 w-6" />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -40,14 +61,14 @@ function ProductDetails({ allData }) {
         style={{ maxWidth: "944px" }}
       >
         <div className="overflow-hidden ">
-          <img className="w-full block p-2" src={items.thumbnail} />
+          <img className="w-full block p-2" src={product.thumbnail} />
         </div>
         <div className="flex flex-col w-96 gap-3 items-start border ">
-          <h3 className="font-bold     lg:text-2xl ">{items.title}</h3>
+          <h3 className="font-bold     lg:text-2xl ">{product.title}</h3>
 
-          <p className="font-bold  ">category :{items.category}</p>
+          <p className="font-bold  ">category :{product.category}</p>
 
-          <p className="font-bold     inline-block  ">price :{items.price}</p>
+          <p className="font-bold     inline-block  ">price :{product.price}</p>
 
           <div>
             <input
@@ -62,6 +83,7 @@ function ProductDetails({ allData }) {
           </div>
         </div>
       </div>
+      <NextBackBtn setProduct={setProduct} id={id} ></NextBackBtn>
     </div>
   );
 }

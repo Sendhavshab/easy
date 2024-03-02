@@ -1,11 +1,21 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./Product";
-import { Link } from "react-router-dom";
+import { GetProductList } from "./ServerData";
+import { FiLoader } from "react-icons/fi";
 
-function ProductList({ allItems, setdataChanger }) {
+function ProductList() {
   const [Query, SetQuery] = useState("");
   const [sort, setsort] = useState("default");
+  const [allItems, SetAllItems] = useState([]);
+
+  useEffect(function () {
+    const data = GetProductList();
+
+    data.then((responce) => {
+      SetAllItems(responce.data.products);
+      console.log("rsponce is ", responce.data.products);
+    });
+  }, []);
 
   const param = allItems.filter(function (item) {
     return (
@@ -29,6 +39,14 @@ function ProductList({ allItems, setdataChanger }) {
   function HandleSelectChange(event) {
     setsort(event.target.value);
   }
+
+  if (allItems.length == 0) {
+    return (
+      <div className="w-screen h-2/3 flex items-center justify-center">
+        <FiLoader className="animate-pulse h-6 w-6" />
+      </div>
+    );
+  }
   return (
     <div className="lg:px-10 ">
       <div className="md:bg-gray-100">
@@ -51,13 +69,7 @@ function ProductList({ allItems, setdataChanger }) {
         </select>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
-            return (
-             
-              
-                <Product items={items} key={index} />
-              
-             
-            );
+            return <Product items={items} key={index} />;
           })}
         </div>
       </div>

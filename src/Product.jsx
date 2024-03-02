@@ -4,9 +4,9 @@ function Product({ items }) {
 
   return (
     <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
-      <Link to={`/Product/${items.id}`} key={items.id}>
+      <Link to={`/Product/${items.id}/details`} key={items.id}>
         <div className="max-h-96 overflow-hidden">
-          <img className="w-full " src={items.thumbnail} />
+          <img className="w-full  " src={items.thumbnail} />
         </div>
 
         <h3 className="font-bold text-xs sm:text-base ">
