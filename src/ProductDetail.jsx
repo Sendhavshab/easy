@@ -11,18 +11,20 @@ function ProductDetails() {
   const [product, setProduct] = useState([]);
   const [OneItemArr, SetOneItemArr] = useState([]);
 
-  const  id  = +(useParams().id);
+  const id = +useParams().id;
   console.log("id is " + id);
 
+  useEffect(
+    function () {
+      const data = GetOneProduct(id);
+      data.then(function (responce) {
+        setProduct(responce.data);
 
-  useEffect(function () {
-    const data = GetOneProduct(id);
-    data.then(function (responce) {
-      setProduct(responce.data);
-
-      console.log(responce.data);
-    });
-  }, [id]);
+        console.log(responce.data);
+      });
+    },
+    [id]
+  );
 
   function AddToCartInputChange(event) {
     console.log("AddToCartInputChange");
@@ -35,11 +37,9 @@ function ProductDetails() {
     setAddToCartInput(changToNum);
   }
 
-  
-
   if (product.length == 0) {
     return (
-      <div>
+      <div className="grow flex flex-col items-center justify-center">
         <Link to="/">
           <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
         </Link>
@@ -51,7 +51,7 @@ function ProductDetails() {
   }
 
   return (
-    <div>
+    <div className="grow">
       <Link to="/">
         <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
       </Link>
@@ -60,8 +60,8 @@ function ProductDetails() {
         className="bg-white p-2 border md:flex min-h-96  rounded-md shadow-xl m-12 lg:m-auto "
         style={{ maxWidth: "944px" }}
       >
-        <div className="overflow-hidden ">
-          <img className="w-full block p-2" src={product.thumbnail} />
+        <div className="overflow-hidden flex items-center justify-center ">
+          <img className="w-full block m-2" src={product.thumbnail} />
         </div>
         <div className="flex flex-col w-96 gap-3 items-start border ">
           <h3 className="font-bold     lg:text-2xl ">{product.title}</h3>
@@ -83,7 +83,7 @@ function ProductDetails() {
           </div>
         </div>
       </div>
-      <NextBackBtn setProduct={setProduct} id={id} ></NextBackBtn>
+      <NextBackBtn setProduct={setProduct} id={id}></NextBackBtn>
     </div>
   );
 }

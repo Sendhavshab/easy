@@ -48,15 +48,17 @@ function ProductList() {
     );
   }
   return (
-    <div className="lg:px-10 ">
+    <div className="lg:px-10 max-w-7xl lg:m-auto pb-12 ">
       <div className="md:bg-gray-100">
         <input
+          title="Search items"
           placeholder="search"
           className="border-2 border-gray-600 rounded-md md:rounded-xl w-20 md:w-40 px-3 md:py-1 hover:transform hover:scale-105 transition duration-300 ease-in-out m-2"
           value={Query}
           onChange={HandleSearchInputChange}
         />
         <select
+          title="Filter items"
           onChange={HandleSelectChange}
           value={sort}
           className="bg-gray-600 text-white rounded-lg   w-20 md:w-40 p-1 m-2 hover:transform hover:scale-105 transition duration-300 ease-in-out"
