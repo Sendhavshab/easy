@@ -5,13 +5,16 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { GetOneProduct } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
 
+import NextBackBtn from "./NextBackBtn";
 function ProductDetails() {
   const [AddToCartInput, setAddToCartInput] = useState(1);
   const [product, setProduct] = useState([]);
   const [OneItemArr, SetOneItemArr] = useState([]);
 
-  const { id } = useParams();
+  const  id  = +(useParams().id);
   console.log("id is " + id);
+
+
   useEffect(function () {
     const data = GetOneProduct(id);
     data.then(function (responce) {
@@ -19,10 +22,9 @@ function ProductDetails() {
 
       console.log(responce.data);
     });
-  }, []);
-  
-  function AddToCartInputChange(event) {
+  }, [id]);
 
+  function AddToCartInputChange(event) {
     console.log("AddToCartInputChange");
 
     let changToNum = +event.target.value;
@@ -33,6 +35,7 @@ function ProductDetails() {
     setAddToCartInput(changToNum);
   }
 
+  
 
   if (product.length == 0) {
     return (
@@ -46,7 +49,6 @@ function ProductDetails() {
       </div>
     );
   }
-
 
   return (
     <div>
@@ -81,6 +83,7 @@ function ProductDetails() {
           </div>
         </div>
       </div>
+      <NextBackBtn setProduct={setProduct} id={id} ></NextBackBtn>
     </div>
   );
 }
