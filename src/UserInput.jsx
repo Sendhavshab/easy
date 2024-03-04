@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from "react";
 import CustomBTNfour from "./Button/ButtonFour";
-
-const UserInput = ({ func, setI, result }) => {
+import { Link } from "react-router-dom";
+import CustomBTNOne from "./Button/ButtonOne";
+const UserInput = ({ func, result }) => {
   const [inputValue, setInputValue] = useState("");
   const [userWords, setUserWords] = useState([]);
   const [userOldResults, setUserOldResults] = useState("");
-
+  const [string, setString] = useState("");
   useEffect(() => {
     const storedUserWords = localStorage.getItem("userWords");
     if (storedUserWords) {
-      setUserOldResults(storedUserWords); // Set initial value for userOldResults as well
+      setUserOldResults(storedUserWords);
     }
-  }, []); // Run once on mount
-
+  }, []);
   useEffect(() => {
     localStorage.setItem("userWords", userWords);
-  }, [userWords]); // Update local storage whenever userWords changes
+  }, [userWords]);
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value.toLowerCase();
     setInputValue(inputValue);
   };
 
-  const confirmBtn = () => {
-    setI(true);
-  };
-
   const handleAddWord = () => {
-    if(inputValue == ''){
-      
-     return alert('Please enter anything');
+    //split se karna he ye
+    if (inputValue == "") {
+      return alert("Please enter anything");
     }
     const updatedWords = userWords ? [...userWords, inputValue] : [inputValue];
-    console.log("updatedWords", updatedWords, "userWords", userWords);
+    let stringWord =
+      updatedWords.slice(0, -1).join("+") +
+      "+" +
+      updatedWords[updatedWords.length - 1];
+    setString(stringWord);
     setUserWords(updatedWords);
-    console.log(userWords);
     func(updatedWords);
     setInputValue("");
   };
@@ -43,16 +42,12 @@ const UserInput = ({ func, setI, result }) => {
     localStorage.removeItem("userWords");
     setUserWords("");
   };
- 
-
-  
-
 
   return (
-    <div
-      
-      className="flex flex-col items-center justify-center space-y-4"
-    >
+    <div className="flex flex-col items-center justify-center space-y-4">
+      <Link to="/lavels">
+        <CustomBTNOne>Practice by Lavel</CustomBTNOne>
+      </Link>
       <input
         className="border border-gray-300 rounded-md px-3 py-2"
         type="text"
@@ -63,12 +58,13 @@ const UserInput = ({ func, setI, result }) => {
       <CustomBTNfour onClick={handleAddWord}>Add Word</CustomBTNfour>
 
       <p className="text-lg">User Words: {result}</p>
-      <button
-        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-        onClick={confirmBtn}
-      >
-        Confirm
-      </button>
+
+      <Link to={`/practiceAria/usertype/${string}`}>
+        <button className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+          Confirm
+        </button>
+      </Link>
+
       <h1 className="text-lg">Your old search result</h1>
       <p className="text-lg">{userOldResults}</p>
       <button
