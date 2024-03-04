@@ -9,7 +9,6 @@ const App = () => {
       className="h-screen w-screen overflow-auto relative  "
       style={{ backgroundColor: bgColor }}
     >
-      <ColorPicker setBgColor={setBgColor}></ColorPicker>
       <AppLogic></AppLogic>
     </div>
   );
