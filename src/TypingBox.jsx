@@ -3,6 +3,7 @@ import React from "react";
 const TypingBox = ({ value, onChange, setShowBackspaceMessage }) => {
   const handleKeyDown = (event) => {
     if (event.key === "Backspace") {
+      console.log("Backspace")
       event.preventDefault();
       setShowBackspaceMessage(true);
       setTimeout(() => {
