@@ -5,9 +5,7 @@ const Highlight = ({ userInput, userWord }) => {
   const words = inputString.split(/\s+/);
 
   const isCorrectWord = (word) => {
-   
-    
-     return userWord.includes(word);
+    return userWord.includes(word);
   };
 
   const renderHighlightedWord = (word, index) => {
@@ -20,7 +18,9 @@ const Highlight = ({ userInput, userWord }) => {
   };
 
   return (
-    <div className="font-bold md:text-lg">{words.map((word, index) => renderHighlightedWord(word, index))}</div>
+    <div className="font-bold md:text-lg">
+      {words.map((word, index) => renderHighlightedWord(word, index))}
+    </div>
   );
 };
 
