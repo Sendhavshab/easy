@@ -7,6 +7,19 @@ import ProductDetails from "./ProductDetail";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
+  const [cartDetail , setCartDetail] = useState({})
+
+
+  function handelAddTocart(productId , ProductValue){
+    
+       const oldValue = cartDetail[productId] || 0 ;
+    setCartDetail({...cartDetail ,[productId] : oldValue + ProductValue  });
+
+
+    console.log(cartDetail , 'cartDetail' , productId , 'productId' , ProductValue)
+  
+  }
+
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       <Header></Header>
@@ -16,7 +29,7 @@ function App() {
 
           <Route
             path="/Product/:id/details"
-            element={<ProductDetails />}
+            element={<ProductDetails onCartbuttonClick={handelAddTocart} />}
           ></Route>
 
           <Route path="*" element={<NotFoundPage></NotFoundPage>} />

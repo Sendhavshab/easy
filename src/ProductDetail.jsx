@@ -7,39 +7,44 @@ import { FiLoader } from "react-icons/fi";
 import NextBackBtn from "./NextBackBtn";
 import NotFoundPage from "./NotFoundPage";
 
-function ProductDetails() {
-  const [AddToCartInput, setAddToCartInput] = useState(1);
+function ProductDetails({ onCartbuttonClick }) {
+  const [CartInputvalue, setCartInputvalue] = useState(1);
   const [product, setProduct] = useState([]);
   const [DataNotFound, SetDataNotFound] = useState(false);
-  
+
   const id = +useParams().id;
   console.log("id is " + id);
 
   useEffect(
     function () {
       const data = GetOneProduct(id);
-      data.then(function (product) {
-        setProduct(product);
-
-      }).catch(function(){
-        SetDataNotFound(true)
-      })
+      data
+        .then(function (product) {
+          setProduct(product);
+          setCartInputvalue(1)
+        })
+        .catch(function () {
+          SetDataNotFound(true);
+        });
     },
     [id]
   );
-    if(DataNotFound){
-
-     return <NotFoundPage/>;
-    }
-  function AddToCartInputChange(event) {
-    console.log("AddToCartInputChange");
+  if (DataNotFound) {
+    return <NotFoundPage />;
+  }
+  function handelCartInputChange(event) {
+    console.log("CartInputvalueChange");
 
     let changToNum = +event.target.value;
 
     if (changToNum === 0) {
       changToNum = "";
     }
-    setAddToCartInput(changToNum);
+    setCartInputvalue(changToNum);
+  }
+  function handelCartButtnchange() {
+
+    onCartbuttonClick(id, CartInputvalue);
   }
 
   if (product.length == 0) {
@@ -77,12 +82,15 @@ function ProductDetails() {
 
           <div>
             <input
-              value={AddToCartInput}
+              value={CartInputvalue}
               type="number"
-              onChange={AddToCartInputChange}
+              onChange={handelCartInputChange}
               className="w-10 h-10 mx-4 border-2 border-black rounded-2xl font-bold"
             />
-            <CustomBTNFour className="rounded-2xl px-2">
+            <CustomBTNFour
+              onClick={handelCartButtnchange}
+              className="rounded-2xl px-2"
+            >
               Add to cart
             </CustomBTNFour>
           </div>
