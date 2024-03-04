@@ -4,28 +4,33 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GetOneProduct } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
-
 import NextBackBtn from "./NextBackBtn";
+import NotFoundPage from "./NotFoundPage";
+
 function ProductDetails() {
   const [AddToCartInput, setAddToCartInput] = useState(1);
   const [product, setProduct] = useState([]);
-  const [OneItemArr, SetOneItemArr] = useState([]);
-
+  const [DataNotFound, SetDataNotFound] = useState(false);
+  
   const id = +useParams().id;
   console.log("id is " + id);
 
   useEffect(
     function () {
       const data = GetOneProduct(id);
-      data.then(function (responce) {
-        setProduct(responce.data);
+      data.then(function (product) {
+        setProduct(product);
 
-        console.log(responce.data);
-      });
+      }).catch(function(){
+        SetDataNotFound(true)
+      })
     },
     [id]
   );
+    if(DataNotFound){
 
+     return <NotFoundPage/>;
+    }
   function AddToCartInputChange(event) {
     console.log("AddToCartInputChange");
 
@@ -39,7 +44,7 @@ function ProductDetails() {
 
   if (product.length == 0) {
     return (
-      <div className="grow flex flex-col items-center justify-center">
+      <div className=" flex flex-col items-center justify-center">
         <Link to="/">
           <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
         </Link>
@@ -51,7 +56,7 @@ function ProductDetails() {
   }
 
   return (
-    <div className="grow">
+    <div>
       <Link to="/">
         <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
       </Link>

@@ -3,19 +3,32 @@ import Product from "./Product";
 import { GetProductList } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
 
+import NotFoundPage from "./NotFoundPage";
+
 function ProductList() {
   const [Query, SetQuery] = useState("");
   const [sort, setsort] = useState("default");
   const [allItems, SetAllItems] = useState([]);
+  const [DataNotFound, SetDataNotFound] = useState(false);
+
 
   useEffect(function () {
     const data = GetProductList();
 
-    data.then((responce) => {
-      SetAllItems(responce.data.products);
-      console.log("rsponce is ", responce.data.products);
-    });
+    data
+      .then((products) => {
+        SetAllItems(products);
+      })
+      .catch(function () {
+        SetDataNotFound(true);
+      });
   }, []);
+
+if (DataNotFound) {
+  return <NotFoundPage />;
+}
+
+
 
   const param = allItems.filter(function (item) {
     return (
