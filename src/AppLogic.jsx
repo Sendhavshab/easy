@@ -41,6 +41,8 @@ const AppLogic = () => {
               userWord={userWord}
               result={result}
               func={setUserWord}
+              UserOldInput={UserOldInput}
+              setUserOldInput={setUserOldInput}
             ></PracticeAria>
           }
         />

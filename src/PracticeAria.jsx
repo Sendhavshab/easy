@@ -8,8 +8,9 @@ import CustomBTNthree from "./Button/ButtonThree";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 import { CallLavelByPracticeAria } from "./Lavels";
-function PracticeAria({ userWord, result, func }) {
-  const [UserOldInput, setUserOldInput] = useState("");
+
+function PracticeAria({ userWord, result, func , UserOldInput, setUserOldInput}) {
+  
   const [copySuccess, setCopySuccess] = useState(false);
   const [ShowBackspaceMessage, setShowBackspaceMessage] = useState(false);
   const [showAll, setShowAll] = useState(false);
@@ -33,6 +34,13 @@ function PracticeAria({ userWord, result, func }) {
 
     func(xyz);
   }
+
+  useEffect(() => {
+    const storedInputText = localStorage.getItem("inputText");
+    if (storedInputText) {
+      setUserOldInput(storedInputText);
+    }
+  }, []);
 
   const handleReset = () => {
     setInputText("");
@@ -86,14 +94,8 @@ function PracticeAria({ userWord, result, func }) {
     }
   }
 
-function generateUniqueKey() {
-  return Math.random().toString(36).substr(2, 9);
-}
   return (
-    <div
-      className="px-5  w-screen h-screen md:mt-6  "
-      key={generateUniqueKey()}
-    >
+    <div className="px-5 w-screen h-screen md:mt-6">
       <Link to="/">
         <IoMdArrowRoundBack className="fixed left-0 top-3" size={40} />
       </Link>
@@ -129,14 +131,14 @@ function generateUniqueKey() {
       />
       <Timer />
       <button
-        className=" text-yellow-200 bg-red-500 px-2 md:px-6 py-1 md:py-2 fixed right-2 bottom-36 border-4
+        className="text-yellow-200 bg-red-500 px-2 md:px-6 py-1 md:py-2 fixed right-2 bottom-36 border-4
          border-green-400 rounded-xl border-solid font-bold transition duration-500 ease-in-out transform hover:scale-110"
         onClick={handleReset}
       >
         Reset
       </button>
       {ShowBackspaceMessage && (
-        <p className="bg-black font-bold text-slate-300 inline-block px-5 rounded-md py-1  ">
+        <p className="bg-black font-bold text-slate-300 inline-block px-5 rounded-md py-1 fixed right-1">
           backspace key don't allowed
         </p>
       )}
