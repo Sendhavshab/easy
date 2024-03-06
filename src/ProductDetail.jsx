@@ -6,6 +6,7 @@ import { GetOneProduct } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
 import NextBackBtn from "./NextBackBtn";
 import NotFoundPage from "./NotFoundPage";
+import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
 
 function ProductDetails({ onCartbuttonClick }) {
   const [CartInputvalue, setCartInputvalue] = useState(1);
@@ -21,7 +22,7 @@ function ProductDetails({ onCartbuttonClick }) {
       data
         .then(function (product) {
           setProduct(product);
-          setCartInputvalue(1)
+          setCartInputvalue(1);
         })
         .catch(function () {
           SetDataNotFound(true);
@@ -32,18 +33,25 @@ function ProductDetails({ onCartbuttonClick }) {
   if (DataNotFound) {
     return <NotFoundPage />;
   }
-  function handelCartInputChange(event) {
+  function HandleInputPlusClick() {
     console.log("CartInputvalueChange");
 
-    let changToNum = +event.target.value;
+    let changToNum = (CartInputvalue + 1);
 
-    if (changToNum === 0) {
-      changToNum = "";
+    if (changToNum !== 11) {
+      setCartInputvalue(changToNum);
     }
+  }
+  function HandleInputMinusClick() {
+    console.log("CartInputvalueChange");
+
+    let changToNum = CartInputvalue - 1;
+
+    if (changToNum !== 0) {
     setCartInputvalue(changToNum);
+    }
   }
   function handelCartButtnchange() {
-
     onCartbuttonClick(id, CartInputvalue);
   }
 
@@ -81,12 +89,17 @@ function ProductDetails({ onCartbuttonClick }) {
           <p className="font-bold     inline-block  ">price :{product.price}</p>
 
           <div>
+            <button className="m-2" onClick={HandleInputMinusClick}>
+              <HiOutlineMinusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
+            </button>
             <input
               value={CartInputvalue}
               type="number"
-              onChange={handelCartInputChange}
-              className="w-10 h-10 mx-4 border-2 border-black rounded-2xl font-bold"
+              className="w-10 text-center h-10 mx-4 border-2 border-black rounded-2xl font-bold"
             />
+            <button className="m-2" onClick={HandleInputPlusClick}>
+              <HiOutlinePlusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
+            </button>
             <CustomBTNFour
               onClick={handelCartButtnchange}
               className="rounded-2xl px-2"

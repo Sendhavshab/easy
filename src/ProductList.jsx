@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { GetProductList } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
-
 import NotFoundPage from "./NotFoundPage";
 
-function ProductList() {
+function ProductList({}) {
   const [Query, SetQuery] = useState("");
   const [sort, setsort] = useState("default");
   const [allItems, SetAllItems] = useState([]);
   const [DataNotFound, SetDataNotFound] = useState(false);
-
 
   useEffect(function () {
     const data = GetProductList();
@@ -24,11 +22,9 @@ function ProductList() {
       });
   }, []);
 
-if (DataNotFound) {
-  return <NotFoundPage />;
-}
-
-
+  if (DataNotFound) {
+    return <NotFoundPage />;
+  }
 
   const param = allItems.filter(function (item) {
     return (

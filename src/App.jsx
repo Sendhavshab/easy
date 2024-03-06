@@ -5,25 +5,34 @@ import NotFoundPage from "./NotFoundPage";
 import Footer from "./Footer";
 import ProductDetails from "./ProductDetail";
 import { Route, Routes } from "react-router-dom";
-
+import CartPage from "./CartPage";
 function App() {
-  const [cartDetail , setCartDetail] = useState({})
+   const localCartNum = localStorage.getItem("my-cart") || "{}";
+     const jSonFormat = JSON.parse(localCartNum);
 
-
+  const [cartDetail, setCartDetail] = useState(jSonFormat);  ;
+      
   function handelAddTocart(productId , ProductValue){
     
        const oldValue = cartDetail[productId] || 0 ;
-    setCartDetail({...cartDetail ,[productId] : oldValue + ProductValue  });
-
-
+       const cart = { ...cartDetail, [productId]: oldValue + ProductValue };
+    setCartDetail(cart);
+      
+       const stringFromat = JSON.stringify(cart);
+       localStorage.setItem("my-cart", stringFromat);
     console.log(cartDetail , 'cartDetail' , productId , 'productId' , ProductValue)
-  
+      
   }
+  
+    const cartProductsValue = Object.keys(cartDetail).reduce(function(result, key){
+     return   cartDetail[key] + result
+    }, 0) 
 
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
-      <Header></Header>
-      <div className="grow">
+      <Header ProductsValue={cartProductsValue}></Header>
+
+      <div className="grow ">
         <Routes>
           <Route index path="/" element={<ProductList></ProductList>}></Route>
 
@@ -31,11 +40,13 @@ function App() {
             path="/Product/:id/details"
             element={<ProductDetails onCartbuttonClick={handelAddTocart} />}
           ></Route>
-
+          <Route
+            path="/mycart"
+            element={<CartPage cartDetail={cartDetail} />}
+          />
           <Route path="*" element={<NotFoundPage></NotFoundPage>} />
         </Routes>
       </div>
-
       <Footer />
     </div>
   );
