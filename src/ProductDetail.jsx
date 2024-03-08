@@ -3,13 +3,15 @@ import CustomBTNFour from "./Button/ButtonFour";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GetOneProduct } from "./ServerData";
-import { FiLoader } from "react-icons/fi";
-
 import NextBackBtn from "./NextBackBtn";
-function ProductDetails() {
-  const [AddToCartInput, setAddToCartInput] = useState(1);
+import NotFoundPage from "./NotFoundPage";
+import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
+import Loader from "./Loader";
+
+function ProductDetails({ onCartbuttonClick }) {
+  const [CartInputvalue, setCartInputvalue] = useState(1);
   const [product, setProduct] = useState([]);
-  const [OneItemArr, SetOneItemArr] = useState([]);
+  const [DataNotFound, SetDataNotFound] = useState(false);
 
   const id = +useParams().id;
   console.log("id is " + id);
@@ -17,41 +19,48 @@ function ProductDetails() {
   useEffect(
     function () {
       const data = GetOneProduct(id);
-      data.then(function (responce) {
-        setProduct(responce.data);
-
-        console.log(responce.data);
-      });
+      data
+        .then(function (product) {
+          setProduct(product);
+          setCartInputvalue(1);
+        })
+        .catch(function () {
+          SetDataNotFound(true);
+        });
     },
     [id]
   );
+  if (DataNotFound) {
+    return <NotFoundPage />;
+  }
+  function HandleInputPlusClick() {
+    console.log("CartInputvalueChange");
 
-  function AddToCartInputChange(event) {
-    console.log("AddToCartInputChange");
+    let changToNum = CartInputvalue + 1;
 
-    let changToNum = +event.target.value;
-
-    if (changToNum === 0) {
-      changToNum = "";
+    if (changToNum !== 11) {
+      setCartInputvalue(changToNum);
     }
-    setAddToCartInput(changToNum);
+  }
+  function HandleInputMinusClick() {
+    console.log("CartInputvalueChange");
+
+    let changToNum = CartInputvalue - 1;
+
+    if (changToNum !== 0) {
+      setCartInputvalue(changToNum);
+    }
+  }
+  function handelCartButtnchange() {
+    onCartbuttonClick(id, CartInputvalue);
   }
 
   if (product.length == 0) {
-    return (
-      <div className="grow flex flex-col items-center justify-center">
-        <Link to="/">
-          <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
-        </Link>
-        <div className="w-screen max-h-96 flex items-center justify-center">
-          <FiLoader className="animate-pulse h-6 w-6" />
-        </div>
-      </div>
-    );
+    return <Loader></Loader>;
   }
 
   return (
-    <div className="grow">
+    <div>
       <Link to="/">
         <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
       </Link>
@@ -71,13 +80,21 @@ function ProductDetails() {
           <p className="font-bold     inline-block  ">price :{product.price}</p>
 
           <div>
+            <button className="m-2" onClick={HandleInputMinusClick}>
+              <HiOutlineMinusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
+            </button>
             <input
-              value={AddToCartInput}
+              value={CartInputvalue}
               type="number"
-              onChange={AddToCartInputChange}
-              className="w-10 h-10 mx-4 border-2 border-black rounded-2xl font-bold"
+              className="w-10 text-center h-10 mx-4 border-2 border-black rounded-2xl font-bold"
             />
-            <CustomBTNFour className="rounded-2xl px-2">
+            <button className="m-2" onClick={HandleInputPlusClick}>
+              <HiOutlinePlusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
+            </button>
+            <CustomBTNFour
+              onClick={handelCartButtnchange}
+              className="rounded-2xl px-2"
+            >
               Add to cart
             </CustomBTNFour>
           </div>
