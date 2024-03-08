@@ -3,10 +3,10 @@ import CustomBTNFour from "./Button/ButtonFour";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { GetOneProduct } from "./ServerData";
-import { FiLoader } from "react-icons/fi";
 import NextBackBtn from "./NextBackBtn";
 import NotFoundPage from "./NotFoundPage";
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
+import Loader from "./Loader";
 
 function ProductDetails({ onCartbuttonClick }) {
   const [CartInputvalue, setCartInputvalue] = useState(1);
@@ -36,7 +36,7 @@ function ProductDetails({ onCartbuttonClick }) {
   function HandleInputPlusClick() {
     console.log("CartInputvalueChange");
 
-    let changToNum = (CartInputvalue + 1);
+    let changToNum = CartInputvalue + 1;
 
     if (changToNum !== 11) {
       setCartInputvalue(changToNum);
@@ -48,7 +48,7 @@ function ProductDetails({ onCartbuttonClick }) {
     let changToNum = CartInputvalue - 1;
 
     if (changToNum !== 0) {
-    setCartInputvalue(changToNum);
+      setCartInputvalue(changToNum);
     }
   }
   function handelCartButtnchange() {
@@ -56,16 +56,7 @@ function ProductDetails({ onCartbuttonClick }) {
   }
 
   if (product.length == 0) {
-    return (
-      <div className=" flex flex-col items-center justify-center">
-        <Link to="/">
-          <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
-        </Link>
-        <div className="w-screen max-h-96 flex items-center justify-center">
-          <FiLoader className="animate-pulse h-6 w-6" />
-        </div>
-      </div>
-    );
+    return <Loader></Loader>;
   }
 
   return (
