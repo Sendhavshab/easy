@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 
 const CustomBTNTwo = ({ onClick, children, className }) => {
   return (
@@ -13,4 +13,4 @@ const CustomBTNTwo = ({ onClick, children, className }) => {
   );
 };
 
-export default CustomBTNTwo;
+export default memo(CustomBTNTwo);

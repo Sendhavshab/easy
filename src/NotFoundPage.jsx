@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import notFoundImage from "./notFoundImage.jpg";
 import { Link } from "react-router-dom";
 import CustomBTNthree from "./Button/ButtonThree";
@@ -14,7 +14,6 @@ function NotFoundPage() {
       </div>
       <div className="flex justify-center items-center flex-col gap-5">
         <h1 className="font-bold text-4xl md:text-5xl text-center">
-          {" "}
           Sorry this Page can't avalable
         </h1>
         <h1 className="text-4xl font-bold text-gray-900">404</h1>
@@ -26,4 +25,4 @@ function NotFoundPage() {
   );
 }
 
-export default NotFoundPage;
+export default memo(NotFoundPage);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CustomBTNFour from "./Button/ButtonFour";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -51,9 +51,12 @@ function ProductDetails({ onCartbuttonClick }) {
       setCartInputvalue(changToNum);
     }
   }
-  function handelCartButtnchange() {
-    onCartbuttonClick(id, CartInputvalue);
-  }
+ const handelCartBtnchange = useCallback(
+   function () {
+     onCartbuttonClick(id, CartInputvalue);
+   },
+   [onCartbuttonClick]
+ );
 
   if (product.length == 0) {
     return <Loader></Loader>;
@@ -92,7 +95,7 @@ function ProductDetails({ onCartbuttonClick }) {
               <HiOutlinePlusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
             </button>
             <CustomBTNFour
-              onClick={handelCartButtnchange}
+              onClick={handelCartBtnchange}
               className="rounded-2xl px-2"
             >
               Add to cart

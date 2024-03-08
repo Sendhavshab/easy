@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import Header from "./Header";
 import ProductList from "./ProductList";
 import NotFoundPage from "./NotFoundPage";
@@ -7,8 +7,11 @@ import ProductDetails from "./ProductDetail";
 import { Route, Routes } from "react-router-dom";
 import CartPage from "./CartPage";
 function App() {
-   const localCartNum = localStorage.getItem("my-cart") || "{}";
-     const jSonFormat = JSON.parse(localCartNum);
+   const jSonFormat = useMemo(function () {
+     const localCartNum = localStorage.getItem("my-cart") || "{}";
+    return JSON.parse(localCartNum);
+   });
+     
 
   const [cartDetail, setCartDetail] = useState(jSonFormat);  ;
       
@@ -24,10 +27,16 @@ function App() {
       
   }
   
-    const cartProductsValue = Object.keys(cartDetail).reduce(function(result, key){
-     return   cartDetail[key] + result
-    }, 0) 
-
+  
+     const cartProductsValue =  useMemo(function() {
+     const a = Object.keys(cartDetail).reduce(function (result, key) {
+        return cartDetail[key] + result;
+    }, 0)
+     return a
+  } , [cartDetail])
+  
+ 
+    console.log(cartProductsValue);
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       <Header ProductsValue={cartProductsValue}></Header>

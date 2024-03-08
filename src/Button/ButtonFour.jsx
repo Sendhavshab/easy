@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const CustomBTNfour = ({ children, onClick , className }) => {
   return (
@@ -11,4 +11,4 @@ const CustomBTNfour = ({ children, onClick , className }) => {
   );
 };
 
-export default CustomBTNfour;
+export default memo(CustomBTNfour);

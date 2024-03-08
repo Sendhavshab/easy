@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FiLoader } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -16,4 +16,4 @@ function Loader(){
  );
 }
 
-export default Loader;
+export default memo(Loader);
