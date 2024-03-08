@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { GetOneProduct } from "./ServerData";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import NotFoundPage from "./NotFoundPage";
@@ -99,4 +99,4 @@ function CartPage({ cartDetail }) {
     </div>
   );
 }
-export default CartPage;
+export default memo(CartPage);

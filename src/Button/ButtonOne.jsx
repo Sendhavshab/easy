@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const CustomBTNOne = ({ onClick, children, className }) => {
   return (
@@ -22,4 +22,4 @@ export function Anchor({ children, className, src }) {
   );
 }
 
-export default CustomBTNOne;
+export default memo(CustomBTNOne);

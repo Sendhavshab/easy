@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
 function Header({ ProductsValue }) {
@@ -25,4 +25,4 @@ function Header({ ProductsValue }) {
     </div>
   );
 }
-export default Header;
+export default  memo(Header);

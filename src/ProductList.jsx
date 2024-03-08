@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Product from "./Product";
 import { GetProductList } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
 import NotFoundPage from "./NotFoundPage";
+import { all } from "axios";
 
 function ProductList({}) {
   const [Query, SetQuery] = useState("");
@@ -26,21 +27,29 @@ function ProductList({}) {
     return <NotFoundPage />;
   }
 
-  const param = allItems.filter(function (item) {
+  const param = useMemo(function(){
+   const a = allItems.filter(function (item) {
     return (
       item.title.toLowerCase().indexOf(Query.toLowerCase()) !== -1 ||
       item.category.toLowerCase().indexOf(Query.toLowerCase()) !== -1
     );
-  });
-  if (sort === "Name") {
-    param.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sort === "low to high") {
-    param.sort((a, b) => a.price - b.price);
-  } else if (sort === "high to low") {
-    param.sort((a, b) => b.price - a.price);
-  } else if (sort === "category") {
-    param.sort((a, b) => a.category.localeCompare(b.category));
-  }
+  })
+  return a 
+}, [allItems , Query]);
+
+
+useEffect(function(){
+    if (sort === "Name") {
+      param.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sort === "low to high") {
+      param.sort((a, b) => a.price - b.price);
+    } else if (sort === "high to low") {
+      param.sort((a, b) => b.price - a.price);
+    } else if (sort === "category") {
+      param.sort((a, b) => a.category.localeCompare(b.category));
+    }
+
+}, [sort]);
 
   function HandleSearchInputChange(event) {
     SetQuery(event.target.value);

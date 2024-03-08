@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { HiArrowSmRight, HiArrowSmLeft } from "react-icons/hi";
 function NextBackBtn({ id, setProduct }) {
@@ -40,4 +40,4 @@ function NextBackBtn({ id, setProduct }) {
   );
 }
 
-export default NextBackBtn;
+export default memo(NextBackBtn);
