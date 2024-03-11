@@ -19,11 +19,12 @@ function CartPage({ cartDetail }) {
     console.log("useEffect running");
     const promises = key.map(function (requestId) {
       setShowLoader(true);
-      return GetOneProduct(requestId);
+      GetOneProduct(requestId);
     }, []);
 
     console.log("promises is", promises);
     let productsPromis = Promise.all(promises);
+    console.log("key.length", key.length);
 
     productsPromis
       .then(function (products) {
@@ -45,7 +46,18 @@ function CartPage({ cartDetail }) {
   if (DataNotFound) {
     return <NotFoundPage />;
   }
-
+  if (key.length == 0) {
+    return (
+      <div>
+        <h1 className="text-3xl   font-extrabold text-red-900 m-3">
+          NOTHING TO SEE THERE FIRST ADD SOMETHING OR -⩥
+          <Link to="/" className="font-bold text-blue-600">
+            GO HOME
+          </Link>
+        </h1>
+      </div>
+    );
+  }
   return (
     // link tag ki to property ko sahi dena he
     <div className="bg-gray-300">
