@@ -3,7 +3,6 @@ import Product from "./Product";
 import { GetProductList } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
 import NotFoundPage from "./NotFoundPage";
-import { all } from "axios";
 
 function ProductList({}) {
   const [Query, SetQuery] = useState("");
