@@ -17,10 +17,12 @@ function CartPage({ cartDetail }) {
 
   useEffect(function () {
     console.log("useEffect running");
+    setShowLoader(true);
+    console.log("useEffect running 2 ");
     const promises = key.map(function (requestId) {
-      setShowLoader(true);
-      GetOneProduct(requestId);
-    }, []);
+      
+     return GetOneProduct(requestId);
+    });
 
     console.log("promises is", promises);
     let productsPromis = Promise.all(promises);
@@ -62,7 +64,7 @@ function CartPage({ cartDetail }) {
     // link tag ki to property ko sahi dena he
     <div className="bg-gray-300">
       <Link to="/">
-        <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
+        <IoMdArrowRoundBack size={39} className="fixed left-3 top-16 md:block hidden"  />
       </Link>
       <div>
         <CustomBTNthree className="block md:hidden">
