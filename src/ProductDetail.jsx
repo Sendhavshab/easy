@@ -14,7 +14,6 @@ function ProductDetails({ onCartbuttonClick }) {
   const [DataNotFound, SetDataNotFound] = useState(false);
   const [showCartItemAdded, setShowCartItemAdded] = useState(false);
   const id = +useParams().id;
-  console.log("id is " + id);
 
   useEffect(
     function () {
@@ -30,11 +29,8 @@ function ProductDetails({ onCartbuttonClick }) {
     },
     [id]
   );
-  if (DataNotFound) {
-    return <NotFoundPage />;
-  }
+  
   function HandleInputPlusClick() {
-    console.log("CartInputvalueChange");
 
     let changToNum = CartInputvalue + 1;
 
@@ -43,7 +39,6 @@ function ProductDetails({ onCartbuttonClick }) {
     }
   }
   function HandleInputMinusClick() {
-    console.log("CartInputvalueChange");
 
     let changToNum = CartInputvalue - 1;
 
@@ -61,7 +56,9 @@ function ProductDetails({ onCartbuttonClick }) {
     },
     [onCartbuttonClick]
   );
-
+if (DataNotFound) {
+  return <NotFoundPage />;
+}
   if (product.length == 0) {
     return <Loader></Loader>;
   }
@@ -80,7 +77,7 @@ function ProductDetails({ onCartbuttonClick }) {
         style={{ maxWidth: "944px" }}
       >
         <div className="overflow-hidden flex  ">
-          <img className="w-full block m-2" src={product.thumbnail} />
+          <img className="w-full block m-2" src={product.thumbnail} alt={product.title} />
         </div>
         <div className="flex flex-col w-96 gap-3 items-start border ">
           <h3 className="font-bold  text-2xl   lg:text-3xl ">

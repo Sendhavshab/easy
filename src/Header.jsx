@@ -20,7 +20,7 @@ function Header({ ProductsValue }) {
               title="Cart"
               className="  hover:transform hover:scale-125 transition duration-300 ease-in-out"
             />
-            <p className="absolute -top-3 font-bold size-5 bg-green-400 rounded-full text-center px-1 -right-2">
+            <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
               {ProductsValue}
             </p>
           </Link>
@@ -29,7 +29,7 @@ function Header({ ProductsValue }) {
               <Link to="/signup">sign Up</Link>
             </button>
             <button className="py-2 px-4 font-bold text-white bg-indigo-600 ">
-              <Link to="/signin">sign In </Link>
+              <Link to="/login">sign In </Link>
             </button>
           </div>
         </div>

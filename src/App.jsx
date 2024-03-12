@@ -6,7 +6,7 @@ import Footer from "./FooterComponent";
 import ProductDetails from "./ProductDetail";
 import { Route, Routes } from "react-router-dom";
 import CartPage from "./CartPage";
-import SignInPage from "./SignIn";
+import LogInPage from "./LogIn";
 import SignUpPage from "./SignUp";
 import MobileManu from "./MobileManu";
 
@@ -25,7 +25,6 @@ function App() {
 
     const stringFromat = JSON.stringify(cart);
     localStorage.setItem("my-cart", stringFromat);
-    console.log(cartDetail, "cartDetail", productId, "productId", ProductValue);
   }
 
   const cartProductsValue = useMemo(
@@ -38,7 +37,6 @@ function App() {
     [cartDetail]
   );
 
-  console.log(cartProductsValue);
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       <Header ProductsValue={cartProductsValue}></Header>
@@ -47,8 +45,8 @@ function App() {
         <Routes>
           <Route
             index
-            path="/signin"
-            element={<SignInPage></SignInPage>}
+            path="/login"
+            element={<LogInPage></LogInPage>}
           ></Route>
           <Route
             index

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoHomeFill } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ function MobileManu({ ProductsValue }) {
                   HOME
                 </Link>
                 <Link
-                  to="/signin"
+                  to="/login"
                   onClick={ManuOpenerClick}
                   className="py-3  border-b-4 "
                 >
@@ -53,7 +53,7 @@ function MobileManu({ ProductsValue }) {
             </div>
           </div>
           <RxCross2
-            className="text-3xl fixed right-7 top-7"
+            className="text-3xl font-bold fixed right-14 top-7"
             onClick={ManuOpenerClick}
           />
         </div>
@@ -69,12 +69,8 @@ function MobileManu({ ProductsValue }) {
           />
         </Link>
         <Link className="absolute right-2 mr-5  inline-block" to="/mycart">
-          <BsCartPlus
-            size={34}
-            title="Cart"
-            className=""
-          />
-          <p className="absolute -top-3 font-bold size-5 bg-green-400 rounded-full text-center px-1 -right-2">
+          <BsCartPlus size={34} title="Cart" className="" />
+          <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
             {ProductsValue}
           </p>
         </Link>
@@ -83,4 +79,4 @@ function MobileManu({ ProductsValue }) {
   );
 }
 
-export default MobileManu;
+export default memo(MobileManu);

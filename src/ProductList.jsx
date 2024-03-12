@@ -22,9 +22,7 @@ function ProductList({}) {
       });
   }, []);
 
-  if (DataNotFound) {
-    return <NotFoundPage />;
-  }
+  
 
   const param = useMemo(
     function () {
@@ -62,6 +60,9 @@ function ProductList({}) {
   function HandleSelectChange(event) {
     setsort(event.target.value);
   }
+if (DataNotFound) {
+  return <NotFoundPage />;
+}
 
   if (allItems.length == 0) {
     return (
@@ -70,7 +71,7 @@ function ProductList({}) {
       </div>
     );
   }
-
+  
   return (
     <div className="lg:px-10 max-w-7xl lg:m-auto pb-12 ">
       <div className="md:bg-gray-100">

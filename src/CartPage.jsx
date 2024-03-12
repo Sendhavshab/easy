@@ -13,24 +13,18 @@ function CartPage({ cartDetail }) {
   const [DataNotFound, SetDataNotFound] = useState(false);
 
   const key = Object.keys(cartDetail);
-  console.log("cartDetail is", cartDetail);
 
   useEffect(function () {
-    console.log("useEffect running");
     setShowLoader(true);
-    console.log("useEffect running 2 ");
     const promises = key.map(function (requestId) {
       
      return GetOneProduct(requestId);
     });
 
-    console.log("promises is", promises);
     let productsPromis = Promise.all(promises);
-    console.log("key.length", key.length);
 
     productsPromis
       .then(function (products) {
-        console.log(products, "products");
         setCartProduct(products);
 
         setShowLoader(false);

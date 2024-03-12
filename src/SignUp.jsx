@@ -1,20 +1,20 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SignUpPage = () => {
   function DataServerSender(value) {
-    console.log("DataServerSender", value.name, value.email, value.password);
   }
 
-  const schema = Yup.object().shape({
+  const schema = useMemo(function(){
+    return Yup.object().shape({
     name: Yup.string().min(4).required(),
     email: Yup.string().email().required(),
     password: Yup.string().min(8).required(),
-  });
-
+  })}
+   , [] )
   const { handleChange, values, handleSubmit, errors, handleBlur, touched , isValid , dirty } =
     useFormik({
       initialValues: {
@@ -25,7 +25,6 @@ const SignUpPage = () => {
       onSubmit: DataServerSender,
       validationSchema: schema,
     });
-  console.log(touched.name);
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -105,7 +104,7 @@ const SignUpPage = () => {
           </button>
           <p className="font-bold text-white ">
             have an account{" "}
-            <Link className="text-blue-600 underline" to="/signin">
+            <Link className="text-blue-600 underline" to="/login">
               Sign In
             </Link>
           </p>

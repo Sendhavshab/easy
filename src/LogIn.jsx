@@ -4,9 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { IoMdArrowRoundBack } from "react-icons/io";
-const SignInPage = () => {
+const LogInPage = () => {
   const DataServerSender = (values) => {
-    console.log("DataServerSender", values.email, values.password);
   };
 
   const schema = Yup.object().shape({
@@ -23,7 +22,6 @@ const SignInPage = () => {
       onSubmit: DataServerSender,
       validationSchema: schema,
     });
-console.log('dirty is ',  dirty)
   return (
     <div className="flex items-center justify-center h-screen">
       <Link to="/">
@@ -88,4 +86,4 @@ console.log('dirty is ',  dirty)
   );
 };
 
-export default SignInPage;
+export default LogInPage;
