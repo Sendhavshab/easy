@@ -42,7 +42,7 @@ function App() {
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       <Header ProductsValue={cartProductsValue}></Header>
-    <MobileManu></MobileManu>
+      <MobileManu ProductsValue={cartProductsValue}></MobileManu>
       <div className="grow ">
         <Routes>
           <Route

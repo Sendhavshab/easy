@@ -18,7 +18,7 @@ function Product({ items }) {
         </p>
         <p className="font-bold text-xs sm:text-base  ">
           <span className=" text-green-500">price : </span>
-          {items.price}
+          ${items.price}
         </p>
       </Link>
     </div>

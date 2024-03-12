@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { MdAccountCircle } from "react-icons/md";
+import { BsCartPlus } from "react-icons/bs";
 
-function MobileManu() {
+function MobileManu({ ProductsValue }) {
   const [showManu, setShowManu] = useState(false);
 
   function ManuOpenerClick() {
@@ -57,14 +58,27 @@ function MobileManu() {
           />
         </div>
       )}
-      <Link to="/">
-        <img
-          title="Logo"
-          className="  w-40 absolute right-2"
-          src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"
-          alt="logo"
-        />
-      </Link>
+
+      <div className="flex items-center justify-center">
+        <Link to="/">
+          <img
+            title="Logo"
+            className="  w-40 inline-block"
+            src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"
+            alt="logo"
+          />
+        </Link>
+        <Link className="absolute right-2 mr-5  inline-block" to="/mycart">
+          <BsCartPlus
+            size={34}
+            title="Cart"
+            className=""
+          />
+          <p className="absolute -top-3 font-bold size-5 bg-green-400 rounded-full text-center px-1 -right-2">
+            {ProductsValue}
+          </p>
+        </Link>
+      </div>
     </div>
   );
 }

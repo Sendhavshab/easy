@@ -12,7 +12,7 @@ function ProductDetails({ onCartbuttonClick }) {
   const [CartInputvalue, setCartInputvalue] = useState(1);
   const [product, setProduct] = useState([]);
   const [DataNotFound, SetDataNotFound] = useState(false);
-
+  const [showCartItemAdded, setShowCartItemAdded] = useState(false);
   const id = +useParams().id;
   console.log("id is " + id);
 
@@ -54,6 +54,10 @@ function ProductDetails({ onCartbuttonClick }) {
   const handelCartBtnchange = useCallback(
     function () {
       onCartbuttonClick(id, CartInputvalue);
+      setShowCartItemAdded(true);
+      setTimeout(function () {
+        setShowCartItemAdded(false);
+      }, 2000);
     },
     [onCartbuttonClick]
   );
@@ -93,20 +97,24 @@ function ProductDetails({ onCartbuttonClick }) {
             <button className="m-2" onClick={HandleInputMinusClick}>
               <HiOutlineMinusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
             </button>
-            <input
-              value={CartInputvalue}
-              type="number"
-              className="w-10 text-center h-10 mx-4 border-2 border-black rounded-2xl font-bold"
-            />
+            <p className="w-10 inline-block text-center h-10 mx-4 border-2 border-black rounded-2xl font-bold">
+              {CartInputvalue}
+            </p>
             <button className="m-2" onClick={HandleInputPlusClick}>
               <HiOutlinePlusCircle className="w-5 h-5 rounded-full hover:bg-black border hover:text-white " />
             </button>
             <CustomBTNFour
               onClick={handelCartBtnchange}
-              className="rounded-2xl px-2 block md:inline-block mt-4 md:m-0 "
+              className="rounded-2xl px-2 block  md:inline-block mt-4 md:m-0 "
+              disabled={showCartItemAdded}
             >
               Add to cart
             </CustomBTNFour>
+            {showCartItemAdded && (
+              <p className="bg-black text-slate-50 fixed text-center  right-auto bottom-28 z-20 ">
+                added to cart Successfully!
+              </p>
+            )}
           </div>
         </div>
       </div>

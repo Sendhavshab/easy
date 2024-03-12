@@ -26,29 +26,35 @@ function ProductList({}) {
     return <NotFoundPage />;
   }
 
-  const param = useMemo(function(){
-   const a = allItems.filter(function (item) {
-    return (
-      item.title.toLowerCase().indexOf(Query.toLowerCase()) !== -1 ||
-      item.category.toLowerCase().indexOf(Query.toLowerCase()) !== -1
-    );
-  })
-  return a 
-}, [allItems , Query]);
+  const param = useMemo(
+    function () {
+      const a = allItems.filter(function (item) {
+        return (
+          item.title.toLowerCase().indexOf(Query.toLowerCase()) !== -1 ||
+          item.category.toLowerCase().indexOf(Query.toLowerCase()) !== -1
+        );
+      });
 
+      return a;
+    },
 
-useEffect(function(){
-    if (sort === "Name") {
-      param.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sort === "low to high") {
-      param.sort((a, b) => a.price - b.price);
-    } else if (sort === "high to low") {
-      param.sort((a, b) => b.price - a.price);
-    } else if (sort === "category") {
-      param.sort((a, b) => a.category.localeCompare(b.category));
-    }
+    [allItems, Query]
+  );
 
-}, [sort]);
+  useEffect(
+    function () {
+      if (sort === "Name") {
+        param.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sort === "low to high") {
+        param.sort((a, b) => a.price - b.price);
+      } else if (sort === "high to low") {
+        param.sort((a, b) => b.price - a.price);
+      } else if (sort === "category") {
+        param.sort((a, b) => a.category.localeCompare(b.category));
+      }
+    },
+    [sort]
+  );
 
   function HandleSearchInputChange(event) {
     SetQuery(event.target.value);
@@ -64,6 +70,7 @@ useEffect(function(){
       </div>
     );
   }
+
   return (
     <div className="lg:px-10 max-w-7xl lg:m-auto pb-12 ">
       <div className="md:bg-gray-100">
@@ -86,6 +93,11 @@ useEffect(function(){
           <option value={"default"}> default Filter</option>
           <option value={"category"}>Sort by category </option>
         </select>
+        {param.length == 0 && (
+          <p className="text-xl font-bold md:text-3xl m-auto text-center text-red-600 ">
+            Sorry we don't have this item try searching Something else
+          </p>
+        )}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
             return <Product items={items} key={index} />;
