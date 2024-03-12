@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoHomeFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { MdAccountCircle } from "react-icons/md";
+import { BsCartPlus } from "react-icons/bs";
 
-function MobileManu() {
+function MobileManu({ ProductsValue }) {
   const [showManu, setShowManu] = useState(false);
 
   function ManuOpenerClick() {
@@ -33,7 +34,7 @@ function MobileManu() {
                   HOME
                 </Link>
                 <Link
-                  to="/signin"
+                  to="/login"
                   onClick={ManuOpenerClick}
                   className="py-3  border-b-4 "
                 >
@@ -52,21 +53,30 @@ function MobileManu() {
             </div>
           </div>
           <RxCross2
-            className="text-3xl fixed right-7 top-7"
+            className="text-3xl font-bold fixed right-14 top-7"
             onClick={ManuOpenerClick}
           />
         </div>
       )}
-      <Link to="/">
-        <img
-          title="Logo"
-          className="  w-40 absolute right-2"
-          src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"
-          alt="logo"
-        />
-      </Link>
+
+      <div className="flex items-center justify-center">
+        <Link to="/">
+          <img
+            title="Logo"
+            className="  w-40 inline-block"
+            src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"
+            alt="logo"
+          />
+        </Link>
+        <Link className="absolute right-2 mr-5  inline-block" to="/mycart">
+          <BsCartPlus size={34} title="Cart" className="" />
+          <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
+            {ProductsValue}
+          </p>
+        </Link>
+      </div>
     </div>
   );
 }
 
-export default MobileManu;
+export default memo(MobileManu);

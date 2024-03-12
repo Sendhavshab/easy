@@ -6,7 +6,7 @@ function Product({ items }) {
     <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
       <Link to={`/Product/${items.id}/details`} key={items.id}>
         <div className=" w-full aspect-square">
-          <img className="w-full h-full object-cover " src={items.thumbnail} />
+          <img className="w-full h-full object-cover " src={items.thumbnail} alt={items.title} />
         </div>
 
         <h3 className="font-bold text-xs sm:text-base ">
@@ -18,7 +18,7 @@ function Product({ items }) {
         </p>
         <p className="font-bold text-xs sm:text-base  ">
           <span className=" text-green-500">price : </span>
-          {items.price}
+          ${items.price}
         </p>
       </Link>
     </div>
