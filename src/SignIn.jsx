@@ -27,7 +27,7 @@ console.log('dirty is ',  dirty)
   return (
     <div className="flex items-center justify-center h-screen">
       <Link to="/">
-        <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
+        <IoMdArrowRoundBack size={39} className="fixed hidden md:block left-3 top-16" />
       </Link>
       <form onSubmit={handleSubmit}>
         <div className="bg-indigo-950 p-6 rounded-lg flex flex-col gap-4">

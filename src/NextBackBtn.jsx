@@ -7,7 +7,7 @@ function NextBackBtn({ id, setProduct }) {
   }
 
   return (
-    <div className="flex justify-between px-3">
+    <div className="flex justify-between max-w-7xl m-auto px-3">
       <div>
         {id <= 1 || (
           <Link
