@@ -1,5 +1,5 @@
 import React from "react";  
-
+import { Helmet } from "react-helmet";
 
 
 function HelmetMeta(param){
@@ -8,7 +8,7 @@ function HelmetMeta(param){
   console.log(url, 'url is ') 
 return (
   <Helmet>
-    <title>EasyKart - {param.category}</title>
+    <title>{"EasyKart - " + param.category}</title>
     <meta name="title" content={param.title} />
     <meta name="description" content={param.description} />
 
