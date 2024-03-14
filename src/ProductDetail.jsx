@@ -7,6 +7,7 @@ import NextBackBtn from "./NextBackBtn";
 import NotFoundPage from "./NotFoundPage";
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
 import Loader from "./Loader";
+import HelmetMeta from "./Helmet";
 
 function ProductDetails({ onCartbuttonClick }) {
   const [CartInputvalue, setCartInputvalue] = useState(1);
@@ -65,6 +66,7 @@ if (DataNotFound) {
 
   return (
     <div>
+      <HelmetMeta param={product} />
       <Link to="/">
         <IoMdArrowRoundBack
           size={39}
