@@ -66,7 +66,6 @@ if (DataNotFound) {
 
   return (
     <div>
-      <HelmetMeta param={product} />
       <Link to="/">
         <IoMdArrowRoundBack
           size={39}
