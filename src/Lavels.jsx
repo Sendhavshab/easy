@@ -24,7 +24,7 @@ const objact = {
     "jag;",
     "fad;",
     "dad;",
-    "daldar;",
+    "dalda;",
     "sag;",
     "gad;",
     "gal;",
@@ -72,22 +72,20 @@ function LavelsComponent({ func }) {
         <CustomBTNOne>MANUALY TYPE WORDS</CustomBTNOne>
       </Link>
 
-      <div>
-        <div>
-          <Link to="/practicearia/lavel1/practice">
-            <CustomBTNTwo onClick={LavelOne}>Lavel 1 - asdf ;lkj</CustomBTNTwo>
-          </Link>
-          <Link to="/practicearia/lavel2/practice">
-            <CustomBTNTwo onClick={LavelTwo}>
-              Lavel 2 - asdfgf ;lkjhj
-            </CustomBTNTwo>
-          </Link>
-          <Link to="/practicearia/lavel3/practice">
-            <CustomBTNTwo onClick={HomeRow}>
-              Lavel 3 - HOME ROW PRACTICE
-            </CustomBTNTwo>
-          </Link>
-        </div>
+      <div className="flex flex-col items-center">
+        <Link to="/practicearia/lavel1/practice">
+          <CustomBTNTwo onClick={LavelOne}>Lavel 1 - asdf ;lkj</CustomBTNTwo>
+        </Link>
+        <Link to="/practicearia/lavel2/practice">
+          <CustomBTNTwo onClick={LavelTwo}>
+            Lavel 2 - asdfgf ;lkjhj
+          </CustomBTNTwo>
+        </Link>
+        <Link to="/practicearia/lavel3/practice">
+          <CustomBTNTwo onClick={HomeRow}>
+            Lavel 3 - HOME ROW PRACTICE
+          </CustomBTNTwo>
+        </Link>
       </div>
     </div>
   );

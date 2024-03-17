@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import UserInput from "./UserInput";
 import { Routes, Route } from "react-router-dom";
 import LavelsComponent from "./Lavels";
 import PracticeAria from "./PracticeAria";
+import UserHistory from "./UserHistory";
+
+
+
 const AppLogic = () => {
+
+
   const [userWord, setUserWord] = useState([]);
-  const [UserOldInput, setUserOldInput] = useState("");
+  
+
 
   
-  useEffect(() => {
-    const storedInputText = localStorage.getItem("inputText");
-    if (storedInputText) {
-      setUserOldInput(storedInputText);
-    }
-  }, []);
 
   const result = userWord.map((word, index) => {
     if (index !== 0) {
@@ -24,30 +25,30 @@ const AppLogic = () => {
   });
 
   return (
-    <div>
-      <Routes>
-        <Route
-          index
-          element={<UserInput func={setUserWord} result={result}></UserInput>}
-        />
-        <Route
-          path="/lavels"
-          element={<LavelsComponent func={setUserWord} />}
-        />
-        <Route
-          path="/practicearia/:lavel/:userinput"
-          element={
-            <PracticeAria
-              userWord={userWord}
-              result={result}
-              func={setUserWord}
-              UserOldInput={UserOldInput}
-              setUserOldInput={setUserOldInput}
-            ></PracticeAria>
-          }
-        />
-      </Routes>
-    </div>
+      
+      <div>
+        <Routes>
+          <Route
+            index
+            element={<UserInput func={setUserWord} result={result}></UserInput>}
+          />
+          <Route
+            path="/lavels"
+            element={<LavelsComponent func={setUserWord} />}
+          />
+          <Route path="/userhistory" element={<UserHistory />} />
+          <Route
+            path="/practicearia/:lavel/:userinput"
+            element={
+              <PracticeAria
+                userWord={userWord}
+                result={result}
+                func={setUserWord}
+              ></PracticeAria>
+            }
+          />
+        </Routes>
+      </div>
   );
 };
 
