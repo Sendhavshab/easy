@@ -18,8 +18,9 @@ const Highlight = ({ userInput, userWord }) => {
   };
 
   return (
-    <div className="font-bold md:text-lg">
+    <div className="font-bold max-h-48 md:max-h-80 overflow lg:max-h-full auto-sc overflow-auto md:text-lg">
       {words.map((word, index) => renderHighlightedWord(word, index))}
+      
     </div>
   );
 };

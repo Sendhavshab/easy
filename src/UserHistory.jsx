@@ -22,7 +22,7 @@ function UserHistory(param) {
 
   let oldInput;
   if (UserOldInput !== "") {
-    if (UserOldInput.split(" ").length > 5) {
+    if (UserOldInput.length > 5) {
       oldInput = (
         <>
           {showAll && (
@@ -59,13 +59,13 @@ function UserHistory(param) {
     setCopySuccess(true);
   };
   return (
-    <div className={`w-screen h-screen  ${param.mainDivClass}`}>
+    <div className={` ${param.mainDivClass}`}>
       <div className="mt-4">
         {copySuccess && <p>Copied!</p>}
         {oldInput ? (
           <CustomBTNthree onClick={handleCopyClick}>Copy</CustomBTNthree>
         ) : (
-          <div className="flex flex-col gap-4 items-center">
+          <div className="flex flex-col md:hidden gap-4 items-center">
             <p className=" font-black text-2xl text-center px-4">
               Sorry for the trouble but we don't save long time history
             </p>

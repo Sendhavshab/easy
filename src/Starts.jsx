@@ -28,6 +28,7 @@ const Stats = ({ wordsTyped, correctWords, incorrectWords }) => {
   return (
     <div>
       <div className=" hidden md:block text-center mb-6 bg-black border rounded-xl ">
+       
         <p className=" m-2 text-lg font-bold inline-block md:block text-blue-600 ">
           Words Typed: {wordsTyped}
         </p>
