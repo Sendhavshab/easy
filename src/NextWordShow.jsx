@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 function NextWordShow({ userWord, inputText, className }) {
   const [checkedWord, setCheckWord] = useState(0);
   const [bounceClass, seBounceClass] = useState("animate-bounce");
+  const [round , setRound] = useState(0)
   const lastWord = useMemo(
     function () {
       const words = inputText.split(" ");
@@ -20,6 +21,7 @@ function NextWordShow({ userWord, inputText, className }) {
     if (userWord[checkedWord] == undefined) {
       setTimeout(function () {
         setCheckWord(0);
+        setRound(round + 1); 
       }, 100);
     } else {
       setCheckWord(checkedWord + 1);
@@ -28,14 +30,16 @@ function NextWordShow({ userWord, inputText, className }) {
 
   return (
     <p
+
       onClick={() =>
         seBounceClass(
           bounceClass === "animate-bounce" ? "animate-none" : "animate-bounce"
         )
       }
-      className={` text-3xl font-bold text-indigo-600  ${className} ${bounceClass}`}
+      title="Next word"
+      className={` cursor-pointer text-3xl font-bold text-indigo-600  ${className} ${bounceClass}`}
     >
-      {userWord[checkedWord]}
+      {userWord[checkedWord]} (R - {round} )
     </p>
   );
 }

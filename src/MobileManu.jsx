@@ -6,6 +6,7 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { GoHistory } from "react-icons/go";
 import { GrClearOption } from "react-icons/gr";
+import LogoImage from "./TypingLogo.png";
 import { ResetEverything } from "./App";
 function MobileManu({ ProductsValue }) {
   const [showManu, setShowManu] = useState(false);
@@ -15,17 +16,27 @@ function MobileManu({ ProductsValue }) {
   }
 
   const handleReset = useContext(ResetEverything);
-  console.log(handleReset , 'cjdkdjdj');
+  console.log(handleReset, "cjdkdjdj");
   return (
-    <div className="w-screen py-2  bg-white md:hidden z-20 min-h-14 relative ">
-      <GiHamburgerMenu
-        onClick={ManuOpenerClick}
-        className="text-3xl text-gray-800 absolute right-2"
-      />
+    <div>
+      <div className="w-screen flex items-center py-2  bg-white md:hidden  min-h-14 relative ">
+        <Link to="/">
+          <img
+            title="Logo"
+            src={LogoImage}
+            width={48}
+            className="inline-block"
+          />
+        </Link>
+        <GiHamburgerMenu
+          onClick={ManuOpenerClick}
+          className="text-3xl text-gray-800 absolute right-2"
+        />
+      </div>
       {showManu && (
         <div
           onClick={ManuOpenerClick}
-          className={`w-screen h-screen bg-black bg-opacity-80 `}
+          className={`w-screen h-screen z-20 bg-black bg-opacity-80 `}
         >
           <div className=" bg-indigo-900 h-full  w-3/4 fixed top-0 right-0  p-8 z-10">
             <div className="text-xl flex flex-col gap-3">

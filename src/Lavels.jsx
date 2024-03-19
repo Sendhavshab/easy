@@ -45,6 +45,13 @@ const objact = {
     "jagd;",
     "ladka;",
   ],
+  lavel4: [
+    "'all'",
+    "'ash'",
+    "'ask'",
+    "'add'",
+    "'kajal'"
+  ]
 };
 
 export function CallLavelByPracticeAria(Lavel) {
@@ -66,6 +73,9 @@ function LavelsComponent({ func }) {
   function HomeRow() {
     func(lavel3);
   }
+  function fullHomeRow() {
+    func(lavel4);
+  }
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <Link to="/">
@@ -84,6 +94,11 @@ function LavelsComponent({ func }) {
         <Link to="/practicearia/lavel3/practice">
           <CustomBTNTwo onClick={HomeRow}>
             Lavel 3 - HOME ROW PRACTICE
+          </CustomBTNTwo>
+        </Link>
+        <Link to="/practicearia/lavel4/practice">
+          <CustomBTNTwo onClick={fullHomeRow}>
+            Lavel 4 - FULL HOME ROW 
           </CustomBTNTwo>
         </Link>
       </div>
