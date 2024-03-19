@@ -76,7 +76,7 @@ function PracticeAria({ userWord, result, func }) {
       </Link>
       <Highlight userInput={inputText} userWord={userWord} />
 
-      <h2
+      <p
         className={`lg:text-3xl md:text-xl font-black inline-block relative m-4  ${haddingClass}`}
       >
         Tumhe
@@ -88,11 +88,11 @@ function PracticeAria({ userWord, result, func }) {
           onClick={handleHaddingClass}
           className="absolute cursor-pointer -right-8 -top-1 text-2xl hover:opacity-100 opacity-60 transition-opacity"
         />
-      </h2>
+      </p>
       {haddingClass == "hidden" && (
         <FaChevronDown
           onClick={handleHaddingClass}
-          className="absolute cursor-pointer right-3 top-12 md:top-3  text-5xl hover:opacity-100 opacity-60 transition-opacity"
+          className="absolute cursor-pointer right-3 top-12   text-5xl hover:opacity-100 opacity-60 transition-opacity"
         />
       )}
       <div className="md:mt-4">

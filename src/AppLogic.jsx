@@ -16,13 +16,13 @@ const AppLogic = () => {
 
   
 
-  const result = userWord.map((word, index) => {
-    if (index !== 0) {
-      return <>{` ${word}`}</>;
-    } else {
-      return <>{word}</>;
-    }
-  });
+ const result = userWord.map((word, index) => {
+   if (index !== 0) {
+     return <span key={index}>{` ${word}`}</span>;
+   } else {
+     return <span key={index}>{word}</span>;
+   }
+ });
 
   return (
       
