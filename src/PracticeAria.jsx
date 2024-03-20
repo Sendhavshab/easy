@@ -6,9 +6,9 @@ import WPM from "./WPM";
 import Timer from "./Timer";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
-import { CallLavelByPracticeAria } from "./Lavels";
+import { CallLevelByPracticeAria } from "./Levels";
 import UserHistory from "./UserHistory";
-import { FaChevronDown } from "react-icons/fa6";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 function PracticeAria({ userWord, result, func }) {
   const [ShowBackspaceMessage, setShowBackspaceMessage] = useState(false);
@@ -17,13 +17,12 @@ function PracticeAria({ userWord, result, func }) {
   const [correctWords, setCorrectWords] = useState(0);
   const [incorrectWords, setIncorrectWords] = useState(0);
   const [haddingClass, setHanddingClass] = useState("");
-  const lavel = useParams().lavel;
+  const level = useParams().level;
   const stringWord = useParams().userinput;
   useEffect(() => {
-    console.log("useEffecta vala code ");
     if (userWord.length === 0) {
       function Output() {
-        return CallLavelByPracticeAria(lavel);
+        return CallLevelByPracticeAria(level);
       }
 
       let xyz = Output();
@@ -37,8 +36,6 @@ function PracticeAria({ userWord, result, func }) {
       func(xyz);
     }
   }, []);
-
-  console.log("useEffect ke bahar vala code ");
 
   const handleInputChange = (event) => {
     const inputValue = event.target.value.toLowerCase();
@@ -62,7 +59,6 @@ function PracticeAria({ userWord, result, func }) {
   };
 
   function handleHaddingClass() {
-    console.log("hannding class is ", haddingClass);
     setHanddingClass("hidden" == haddingClass ? "" : "hidden");
   }
 
@@ -84,15 +80,15 @@ function PracticeAria({ userWord, result, func }) {
           {result}
         </span>
         type karna hai
-        <FaChevronDown
+        <FaChevronUp
           onClick={handleHaddingClass}
-          className="absolute cursor-pointer -right-8 -top-1 text-2xl hover:opacity-100 opacity-60 transition-opacity"
+          className="absolute cursor-pointer -right-8 -bottom-1 text-2xl hover:opacity-100 opacity-60 transition-opacity"
         />
       </p>
       {haddingClass == "hidden" && (
         <FaChevronDown
           onClick={handleHaddingClass}
-          className="absolute cursor-pointer right-3 top-12   text-5xl hover:opacity-100 opacity-60 transition-opacity"
+          className="absolute cursor-pointer right-3 top-14 text-3xl   md:text-5xl hover:opacity-100 opacity-60 transition-opacity"
         />
       )}
       <div className="md:mt-4">

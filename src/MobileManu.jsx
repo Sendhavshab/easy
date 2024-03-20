@@ -1,22 +1,26 @@
 import React, { memo, useContext, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoHomeFill } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { GoHistory } from "react-icons/go";
 import { GrClearOption } from "react-icons/gr";
 import LogoImage from "./TypingLogo.png";
 import { ResetEverything } from "./App";
-function MobileManu({ ProductsValue }) {
+import { MdOutlineGrading } from "react-icons/md";
+import Timer from "./Timer";
+function MobileManu() {
   const [showManu, setShowManu] = useState(false);
 
   function ManuOpenerClick() {
     setShowManu(!showManu);
   }
 
+  const location = useLocation();
   const handleReset = useContext(ResetEverything);
-  console.log(handleReset, "cjdkdjdj");
+
+ 
   return (
     <div>
       <div className="w-screen flex items-center py-2  bg-white md:hidden  min-h-14 relative ">
@@ -28,10 +32,13 @@ function MobileManu({ ProductsValue }) {
             className="inline-block"
           />
         </Link>
-        <GiHamburgerMenu
-          onClick={ManuOpenerClick}
-          className="text-3xl text-gray-800 absolute right-2"
-        />
+        <div className="absolute right-2 flex gap-6">
+          {location.pathname.startsWith("/practicearia") && <Timer></Timer>}
+          <GiHamburgerMenu
+            onClick={ManuOpenerClick}
+            className="text-3xl text-gray-800 "
+          />
+        </div>
       </div>
       {showManu && (
         <div
@@ -56,6 +63,14 @@ function MobileManu({ ProductsValue }) {
                 >
                   <GoHistory className="inline-block mr-2" />
                   HISTORY
+                </Link>
+                <Link
+                  to="/levels"
+                  onClick={ManuOpenerClick}
+                  className="py-3  border-b-4 "
+                >
+                  <MdOutlineGrading className="inline-block mr-2" />
+                  LEVELS
                 </Link>
                 <Link
                   onClick={handleReset}

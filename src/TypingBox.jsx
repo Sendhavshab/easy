@@ -10,7 +10,6 @@ const TypingBox = ({
 }) => {
   const handleKeyDown = (event) => {
     if (event.key === "Backspace") {
-      console.log("Backspace");
       event.preventDefault();
       setShowBackspaceMessage(true);
       setTimeout(() => {

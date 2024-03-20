@@ -50,3 +50,4 @@ const WPM = ({ inputText }) => {
 };
 
 export default WPM;
+ 

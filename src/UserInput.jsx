@@ -45,8 +45,8 @@ const UserInput = ({ func, result }) => {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
-      <Link to="/lavels">
-        <CustomBTNOne>Practice by Lavel</CustomBTNOne>
+      <Link to="/levels">
+        <CustomBTNOne>Practice by Level</CustomBTNOne>
       </Link>
       <input
         className="border border-gray-300 rounded-md px-3 py-2"

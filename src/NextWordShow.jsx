@@ -8,7 +8,6 @@ function NextWordShow({ userWord, inputText, className }) {
     function () {
       const words = inputText.split(" ");
       const lW = words[words.length - 2];
-      console.log(lW);
       return lW;
     },
     [inputText]

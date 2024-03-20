@@ -14,9 +14,12 @@ const Timer = () => {
   }, []);
 
   return (
-    <p title="seconds"
+    <p
+      title="seconds"
       onClick={() => setShowName(!showName)}
-      className="font-bold fixed cursor-pointer z-40 md:right-6 top-0"
+      className={`font-bold cursor-pointer z-40 ${
+        showName ? "text-xl" : " text-2xl md:text-3xl"
+      } `}
     >
       {" "}
       {showName && "Second"} {seconds}
