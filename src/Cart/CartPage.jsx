@@ -1,26 +1,31 @@
-import React, { useState, useEffect, memo } from "react";
-import { GetOneProduct } from "./ServerData";
+import React, { useState, useEffect, memo, useContext } from "react";
+import { GetOneProduct } from "../ServerData";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import NotFoundPage from "./NotFoundPage";
-import CustomBTNthree from "./Button/ButtonThree";
-import CustomBTNOne from "./Button/ButtonOne";
+import NotFoundPage from "../handleError/NotFoundPage";
+import CustomBTNthree from "../Button/ButtonThree";
+import CustomBTNOne from "../Button/ButtonOne";
 import { Link } from "react-router-dom";
-import Loader from "./Loader";
+import Loader from "../handleError/Loader";
+import CartCountChange from "./CartCountChange";
+import CartItemRemover from "./CartItemRemover";
+import { AddTocartContext } from "../App";
 
-function CartPage({ cartDetail }) {
+function CartPage() {
+  
+  const {cartDetail} = useContext(AddTocartContext)
   const [CartProduct, setCartProduct] = useState([{}]);
   const [showLoader, setShowLoader] = useState(false);
   const [DataNotFound, SetDataNotFound] = useState(false);
-
+  console.log('cart detail run' , cartDetail)
   const key = Object.keys(cartDetail);
 
   useEffect(function () {
+    console.log('CartDetail change hui ' , cartDetail);
     setShowLoader(true);
     const promises = key.map(function (requestId) {
-      
-     return GetOneProduct(requestId);
+      return GetOneProduct(requestId);
     });
-
+   console.log('cartpage rerun')
     let productsPromis = Promise.all(promises);
 
     productsPromis
@@ -34,7 +39,7 @@ function CartPage({ cartDetail }) {
 
         setShowLoader(false);
       });
-  }, []);
+  },  [cartDetail]);
 
   if (showLoader) {
     return <Loader></Loader>;
@@ -46,7 +51,7 @@ function CartPage({ cartDetail }) {
     return (
       <div>
         <h1 className="text-3xl   font-extrabold text-red-900 m-3">
-          NOTHING TO SEE THERE FIRST ADD SOMETHING OR -⩥
+          NOTHING TO SEE THERE FIRST ADD SOMETHING -⩥
           <Link to="/" className="font-bold text-blue-600">
             GO HOME
           </Link>
@@ -58,7 +63,11 @@ function CartPage({ cartDetail }) {
     // link tag ki to property ko sahi dena he
     <div className="bg-gray-300">
       <Link to="/">
-        <IoMdArrowRoundBack size={39} className="fixed left-3 top-16 md:block hidden"  />
+        <IoMdArrowRoundBack
+          size={39}
+          className="fixed hidden text-gray-400 hover:text-black opacity-60 hover:opacity-100  md:block left-3 top-16"
+          title="Go Back"
+        />
       </Link>
       <div>
         <CustomBTNthree className="block md:hidden">
@@ -74,23 +83,28 @@ function CartPage({ cartDetail }) {
           />
           <CustomBTNOne>CHECK COUPEN</CustomBTNOne>
         </div>
-        {CartProduct.map(function (array) {
+        {CartProduct.map(function (product, index) {
           return (
-            <div className="m-4 sm:flex gap-3 justify-around md:justify-normal">
+            <div
+              key={index}
+              className="m-4 sm:flex gap-3 justify-around md:justify-normal"
+            >
               <div className=" w-full sm:max-w-xs aspect-square">
                 <img
                   className="w-full h-full object-cover "
-                  src={array.thumbnail}
+                  src={product.thumbnail}
                 />
               </div>
+              <CartItemRemover id={product.id} />
               <div className="">
                 <h3 className="font-bold text-2xl md:text-center text-blue-700">
-                  {array.title}
+                  {product.title}
                 </h3>
-                <p className="md:text-center">₹ {array.price}</p>
+                <p className="md:text-center">₹ {product.price}</p>
                 <h5 className="text-lg md:text-center font-bold text-green-700">
-                  quantity :{cartDetail[array.id]}{" "}
+                  quantity :{cartDetail[product.id]}{" "}
                 </h5>
+                <CartCountChange id={product.id} />
                 <div className=" flex flex-col md:hidden gap-3 items-center">
                   <CustomBTNthree className="block">BY NOW </CustomBTNthree>
                   <input
@@ -107,4 +121,4 @@ function CartPage({ cartDetail }) {
     </div>
   );
 }
-export default memo(CartPage);
+export default CartPage;

@@ -3,7 +3,7 @@ import CustomBTNOne, { Anchor } from "./Button/ButtonOne";
 
 function Footer() {
   return (
-    <div className="w-full bg-gray-600 ">
+    <div className="w-full bg-gray-600 lg:mt-10 ">
       <div className=" max-w-7xl lg:m-auto  max-h-48 md:h-16 mt-3   relative shadow-lg">
         <div className="md:absolute top-4 ">
           <div className="flex justify-evenly md:inline-block">

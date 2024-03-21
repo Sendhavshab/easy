@@ -2,14 +2,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import Product from "./Product";
 import { GetProductList } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
-import NotFoundPage from "./NotFoundPage";
+import NotFoundPage from "./handleError/NotFoundPage";
 
 function ProductList({}) {
   const [Query, SetQuery] = useState("");
   const [sort, setsort] = useState("default");
   const [allItems, SetAllItems] = useState([]);
   const [DataNotFound, SetDataNotFound] = useState(false);
-
+  const [informSortChanged, SetInformSortChanged] = useState(false);
   useEffect(function () {
     const data = GetProductList();
 
@@ -21,8 +21,6 @@ function ProductList({}) {
         SetDataNotFound(true);
       });
   }, []);
-
-  
 
   const param = useMemo(
     function () {
@@ -50,6 +48,7 @@ function ProductList({}) {
       } else if (sort === "category") {
         param.sort((a, b) => a.category.localeCompare(b.category));
       }
+      SetInformSortChanged(!informSortChanged);
     },
     [sort]
   );
@@ -60,9 +59,9 @@ function ProductList({}) {
   function HandleSelectChange(event) {
     setsort(event.target.value);
   }
-if (DataNotFound) {
-  return <NotFoundPage />;
-}
+  if (DataNotFound) {
+    return <NotFoundPage />;
+  }
 
   if (allItems.length == 0) {
     return (
@@ -71,7 +70,7 @@ if (DataNotFound) {
       </div>
     );
   }
-  
+
   return (
     <div className="lg:px-10 max-w-7xl lg:m-auto pb-12 ">
       <div className="md:bg-gray-100">

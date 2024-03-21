@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 import notFoundImage from "./notFoundImage.jpg";
 import { Link } from "react-router-dom";
-import CustomBTNthree from "./Button/ButtonThree";
+import CustomBTNthree from "../Button/ButtonThree";
 function NotFoundPage() {
   return (
-    <div className="flex flex-col max-w-7xl sm:flex-row gap-3 m-4 bg-gray-400  rounded-md  xl:m-auto items-center justify-center">
+    <div className="flex flex-col max-w-7xl sm:flex-row gap-3 m-4 bg-gray-400 rounded-md  xl:m-auto items-center justify-center">
       <div className="aspect-square">
         <img
           className="w-full h-full object-cover"
