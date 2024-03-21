@@ -24,12 +24,12 @@ function Header({ ProductsValue }) {
             </p>
           </Link>
           <div className="py-1 px-2 bg-slate-400 border border-blue-300 border-solid rounded-md flex gap-1 ">
-            <button className="py-2 px-4 font-bold bg-white hover:bg-green-500">
-              <Link to="/signup">sign Up</Link>
-            </button>
-            <button className="py-2 px-4  font-bold hover:bg-green-500 hover:text-black text-white bg-indigo-600 ">
-              <Link to="/login">sign In </Link>
-            </button>
+           <Link to="/signup"> <button className="py-2 px-4 font-bold bg-white hover:bg-green-500">
+              sign Up
+            </button></Link>
+           <Link to="/login">  <button className="py-2 px-4  font-bold hover:bg-green-500 hover:text-black text-white bg-indigo-600 ">
+             sign In 
+            </button></Link>
           </div>
         </div>
       </div>
