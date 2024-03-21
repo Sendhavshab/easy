@@ -14,21 +14,20 @@ function Header({ ProductsValue }) {
           />
         </Link>
         <div className=" m-4 flex items-center gap-3">
-          <Link className="relative mr-5 mt-3 inline-block" to="/mycart">
-            <BsCartPlus
-              size={34}
-              title="Cart"
-              className="  hover:transform hover:scale-125 transition duration-300 ease-in-out"
-            />
+          <Link
+            className="relative mr-5 mt-3 hover:transform hover:scale-125 transition duration-300 ease-in-out inline-block"
+            to="/mycart"
+          >
+            <BsCartPlus size={34} title="Cart" className="  " />
             <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
               {ProductsValue}
             </p>
           </Link>
           <div className="py-1 px-2 bg-slate-400 border border-blue-300 border-solid rounded-md flex gap-1 ">
-            <button className="py-2 px-4 font-bold bg-white ">
+            <button className="py-2 px-4 font-bold bg-white hover:bg-green-500">
               <Link to="/signup">sign Up</Link>
             </button>
-            <button className="py-2 px-4 font-bold text-white bg-indigo-600 ">
+            <button className="py-2 px-4  font-bold hover:bg-green-500 hover:text-black text-white bg-indigo-600 ">
               <Link to="/login">sign In </Link>
             </button>
           </div>

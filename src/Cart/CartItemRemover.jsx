@@ -1,0 +1,56 @@
+import React, { useContext, useState } from "react";
+import { AddTocartContext } from "../App";
+import { GiCrossMark } from "react-icons/gi";
+
+const CartItemRemover = ({ id }) => {
+  const { handelAddTocart } = useContext(AddTocartContext);
+  const [PopUp, setPopUp] = useState(false);
+
+  const handleCrossClick = () => {
+    setPopUp(true);
+  };
+  const InfoYesClick = () => {
+    handelAddTocart(id, -1);
+  };
+
+  const InfoNoClick = () => {
+    setPopUp(false);
+  };
+
+  return (
+    <div>
+      <div>
+        <GiCrossMark
+          title="Remove item"
+          className="cursor-pointer "
+          onClick={handleCrossClick}
+        />
+      </div>
+      {PopUp && (
+        <div className="flex justify-center bg-black bg-opacity-30 items-center fixed inset-0">
+          <div className="aspect-video border border-inherit bg-white relative shadow-black shadow-lg sm:w-3/6 p- w-4/6 2xl:max-w-md lg:w-2/6 rounded-xl">
+            <h2 className="font-bold  text-center text-xl  p-2 md:text-3xl lg:text-2xl xl:text-3xl md:font-black">
+              Do you want to remove the item from the cart?
+            </h2>
+            <div className=" absolute bottom-0 w-full  flex justify-evenly ">
+              <button
+                onClick={InfoNoClick}
+                className="w-1/3 font-bold sm:mb-3 hover:bg-blue-600 bg-blue-500 hover:scale-110  rounded-full"
+              >
+                No!
+              </button>
+              <button
+                onClick={InfoYesClick}
+                className="w-1/3 font-bold sm:mb-3 border-2 border-blue-500 hover:bg-blue-400 hover:scale-90 rounded-full "
+              >
+                Yes!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CartItemRemover;
