@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import notFoundImage from "./notFoundImage.jpg";
 import { Link, useParams } from "react-router-dom";
 import CustomBTNthree from "../Button/ButtonThree";
-import CustomBTNTwo from "../Button/ButtonTwo";
+import CustomBTNTwo from "../Button/Buttontwo";
 function NotFoundPage() {
   const url = window.location.pathname;
   console.log(url);
