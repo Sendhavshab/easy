@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { AddTocartContext } from "../App";
 import { GiCrossMark } from "react-icons/gi";
+import { TiDeleteOutline } from "react-icons/ti";
 
-const CartItemRemover = ({ id }) => {
+const CartItemRemover = ({ id , callByCountChange }) => {
   const { handelAddTocart } = useContext(AddTocartContext);
   const [PopUp, setPopUp] = useState(false);
 
@@ -17,12 +18,27 @@ const CartItemRemover = ({ id }) => {
     setPopUp(false);
   };
 
+
+  if(callByCountChange){
+    
+       return (
+         <TiDeleteOutline
+           title="Remove item"
+           onClick={InfoYesClick}
+           className="w-5 h-5 rounded-full hover:bg-black border hover:text-white "
+         />
+       );
+  }
+
+
+
+
   return (
-    <div>
+    <div className="absolute sm:static -inset-y-5 inset-x-full ">
       <div>
         <GiCrossMark
           title="Remove item"
-          className="cursor-pointer "
+          className="cursor-pointer absolute sm:static right-1"
           onClick={handleCrossClick}
         />
       </div>

@@ -20,19 +20,20 @@ function App() {
 
   const [cartDetail, setCartDetail] = useState(jSonFormat);
 
-  function handelAddTocart(productId, ProductValue) {
- let cart;
-     if(ProductValue === -1){
-        cart = {...cartDetail};
-        delete cart[productId];
-        setCartDetail(cart);
-
-     }else{
-       const oldValue = cartDetail[productId] || 0;
-    cart = { ...cartDetail, [productId]: oldValue + ProductValue };
-    setCartDetail(cart);
-  }
-  const stringFromat = JSON.stringify(cart);
+  function handelAddTocart(productId, ProductValue, doNotPlus) {
+    console.log(('hhshhshshshshshshshsh'))
+    let cart;
+    if (ProductValue === -1) {
+      cart = { ...cartDetail };
+      delete cart[productId];
+      setCartDetail(cart);
+    } else {
+      const oldValue = doNotPlus ? 0 : cartDetail[productId]  || 0;
+  console.log("old value to ", oldValue, "g", doNotPlus);
+      cart = { ...cartDetail, [productId]: oldValue + ProductValue };
+      setCartDetail(cart);
+    }
+    const stringFromat = JSON.stringify(cart);
     localStorage.setItem("my-cart", stringFromat);
   }
 
