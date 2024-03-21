@@ -11,35 +11,37 @@ import CartItemRemover from "./CartItemRemover";
 import { AddTocartContext } from "../App";
 
 function CartPage() {
-  
-  const {cartDetail} = useContext(AddTocartContext)
+  const { cartDetail } = useContext(AddTocartContext);
   const [CartProduct, setCartProduct] = useState([{}]);
   const [showLoader, setShowLoader] = useState(false);
   const [DataNotFound, SetDataNotFound] = useState(false);
-  console.log('cart detail run' , cartDetail)
+  console.log("cart detail run", cartDetail);
   const key = Object.keys(cartDetail);
 
-  useEffect(function () {
-    console.log('CartDetail change hui ' , cartDetail);
-    setShowLoader(true);
-    const promises = key.map(function (requestId) {
-      return GetOneProduct(requestId);
-    });
-   console.log('cartpage rerun')
-    let productsPromis = Promise.all(promises);
-
-    productsPromis
-      .then(function (products) {
-        setCartProduct(products);
-
-        setShowLoader(false);
-      })
-      .catch(function () {
-        SetDataNotFound(true);
-
-        setShowLoader(false);
+  useEffect(
+    function () {
+      console.log("CartDetail change hui ", cartDetail);
+      setShowLoader(true);
+      const promises = key.map(function (requestId) {
+        return GetOneProduct(requestId);
       });
-  },  [cartDetail]);
+      console.log("cartpage rerun");
+      let productsPromis = Promise.all(promises);
+
+      productsPromis
+        .then(function (products) {
+          setCartProduct(products);
+
+          setShowLoader(false);
+        })
+        .catch(function () {
+          SetDataNotFound(true);
+
+          setShowLoader(false);
+        });
+    },
+    [cartDetail]
+  );
 
   if (showLoader) {
     return <Loader></Loader>;
@@ -61,7 +63,7 @@ function CartPage() {
   }
   return (
     // link tag ki to property ko sahi dena he
-    <div className="bg-gray-300">
+    <div className="bg-gray-300 py-5">
       <Link to="/">
         <IoMdArrowRoundBack
           size={39}
@@ -73,7 +75,7 @@ function CartPage() {
         <CustomBTNthree className="block md:hidden">
           BY NOW all {key.length} products
         </CustomBTNthree>
-        <div className=" hidden md:flex flex-col max-w-4xl m-auto">
+        <div className=" hidden md:flex flex-col md:max-w-2xl lg:max-w-4xl m-auto">
           <CustomBTNthree className="block">
             BY NOW all {key.length} products
           </CustomBTNthree>
@@ -89,22 +91,26 @@ function CartPage() {
               key={index}
               className="m-4 sm:flex gap-3 justify-around md:justify-normal"
             >
-              <div className=" w-full sm:max-w-xs aspect-square">
+              <div className=" relative w-full sm:max-w-xs aspect-square">
+                <CartItemRemover id={product.id} />
                 <img
                   className="w-full h-full object-cover "
                   src={product.thumbnail}
                 />
               </div>
-              <CartItemRemover id={product.id} />
+
               <div className="">
                 <h3 className="font-bold text-2xl md:text-center text-blue-700">
                   {product.title}
                 </h3>
                 <p className="md:text-center">₹ {product.price}</p>
                 <h5 className="text-lg md:text-center font-bold text-green-700">
-                  quantity :{cartDetail[product.id]}{" "}
+                  quantity :{cartDetail[product.id]}
                 </h5>
-                <CartCountChange id={product.id} />
+                <CartCountChange
+                  id={product.id}
+                  productValue={cartDetail[product.id]}
+                />
                 <div className=" flex flex-col md:hidden gap-3 items-center">
                   <CustomBTNthree className="block">BY NOW </CustomBTNthree>
                   <input
