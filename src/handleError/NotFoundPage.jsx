@@ -5,7 +5,7 @@ import CustomBTNthree from "../Button/ButtonThree";
 import CustomBTNTwo from "../Button/Buttontwo";
 function NotFoundPage() {
   const url = window.location.pathname;
-  console.log(url);
+  
   return (
     <div className="flex flex-col max-w-7xl sm:flex-row gap-3 m-4 bg-gray-400 rounded-md  xl:m-auto items-center justify-center">
       <div className="aspect-square">

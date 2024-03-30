@@ -3,6 +3,7 @@ import Product from "./Product";
 import { GetProductList } from "./ServerData";
 import { FiLoader } from "react-icons/fi";
 import NotFoundPage from "./handleError/NotFoundPage";
+import Loader from "./handleError/Loader";
 
 function ProductList({}) {
   const [Query, SetQuery] = useState("");
@@ -73,6 +74,7 @@ function ProductList({}) {
 
   return (
     <div className="lg:px-10 max-w-7xl lg:m-auto pb-12 ">
+      {allItems.length == 0 && <Loader></Loader>}
       <div className="md:bg-gray-100">
         <input
           title="Search items"

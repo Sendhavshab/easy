@@ -32,7 +32,7 @@ function ProductDetails() {
     return <NotFoundPage />;
   }
   if (product.length == 0) {
-    return <Loader></Loader>;
+    return <Loader arrow></Loader>;
   }
 
   return (

@@ -1,13 +1,21 @@
 import { Form, Formik, useFormik } from "formik";
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Input from "../Input";
+import { UserAccount } from "../App";
 
 const SignUpPage = () => {
-  function DataServerSender(value) {}
 
+
+ const {UserAccountAPICaller} = useContext(UserAccount)
+
+
+  function DataServerSender(value) {
+
+    UserAccountAPICaller(value);
+  }
   const schema = useMemo(function () {
     return Yup.object().shape({
       name: Yup.string().min(4).required(),

@@ -1,7 +1,10 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { UserAccount } from "./App";
+import { FaUserCircle } from "react-icons/fa";
 function Header({ ProductsValue }) {
+  const { user } = useContext(UserAccount);
   return (
     <div className="w-full bg-white mb-10 hidden md:block">
       <div className="max-w-7xl lg:m-auto flex md:h-16 justify-between items-center">
@@ -23,14 +26,24 @@ function Header({ ProductsValue }) {
               {ProductsValue}
             </p>
           </Link>
-          <div className="py-1 px-2 bg-slate-400 border border-blue-300 border-solid rounded-md flex gap-1 ">
-           <Link to="/signup"> <button className="py-2 px-4 font-bold bg-white hover:bg-green-500">
-              sign Up
-            </button></Link>
-           <Link to="/login">  <button className="py-2 px-4  font-bold hover:bg-green-500 hover:text-black text-white bg-indigo-600 ">
-             sign In 
-            </button></Link>
-          </div>
+          {user ? (
+           <Link to="/myprofile"> <FaUserCircle className="text-3xl hover:scale-110 transition transform  cursor-pointer" /></Link>
+          ) : (
+            <div className="py-1 px-2 bg-slate-400 border border-blue-300 border-solid rounded-md flex gap-1 ">
+              <Link to="/signup">
+                {" "}
+                <button className="py-2 px-4 font-bold bg-white hover:bg-green-500">
+                  sign Up
+                </button>
+              </Link>
+              <Link to="/login">
+                {" "}
+                <button className="py-2 px-4  font-bold hover:bg-green-500 hover:text-black text-white bg-indigo-600 ">
+                  Log In
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

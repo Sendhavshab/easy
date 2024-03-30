@@ -10,11 +10,12 @@ const CustomBTNOne = ({ onClick, children, className }) => {
     </button>
   );
 };
-export function Anchor({ children, className, src }) {
+export function Anchor({ children, className, src , ...props }) {
   return (
-    <a
+        <a
       href={src}
-      className={`${className} font-bold m-3  text-green-500  hover:border-b-2  `}
+      {...props}
+      className={`${className} font-bold m-3 text-green-500 hover:border-b-2 transition-transform duration-300 hover:translate-y-1`}
     >
       {children}
     </a>
