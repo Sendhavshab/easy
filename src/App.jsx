@@ -13,8 +13,7 @@ import { GetUser, accountServerDataSender } from "./ServerData";
 import RedirectLogin, { RedirectHome } from "./Redirect";
 import Loader from "./handleError/Loader";
 import Profile from "./Profile";
-import AlertShow from "./handleError/AlertShow";
-import { inRange } from "lodash";
+import AlertList from "./handleError/AlertList";
  
 export const AddTocartContext = createContext();
 export const UserAccount = createContext();
@@ -116,19 +115,12 @@ function App() {
   if (UserLoading) {
     return <Loader></Loader>;
   }
-  console.log("inRange(isAlert)", [...Array(10).keys()] , isAlert);
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       {Loading && <Loader></Loader>}
-      {isAlert !== 0 && (
-        <div className="absolute flex flex-col top-3 right-3">
-          {[...Array(isAlert).keys()].map((i) => {
-       return   <AlertShow key={i} type="error" setIsAlert={setIsAlert}>
-              Login Error check internet connection
-            </AlertShow>;
-          })}
-        </div>
-      )}
+      <AlertList type="error" howMuch={isAlert}>
+        Login Error check internet connection
+      </AlertList>
       <UserAccount.Provider value={accountObj}>
         <AddTocartContext.Provider value={contextValue}>
           <Header ProductsValue={cartProductsValue}></Header>

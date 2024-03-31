@@ -25,7 +25,7 @@ const AlertMap = {
   },
 };
 
-const Alert = ({ type, children }) => {
+const Alert = ({ type, children, setAlertShow }) => {
   const { backgroundColor, Icon } = AlertMap[type];
   return (
     <div
@@ -36,7 +36,7 @@ const Alert = ({ type, children }) => {
         <h1 className="text-white text-xl font-bold">{type}</h1>
         <p className="text-white text-sm opacity-85">{children}</p>
       </div>
-      <RxCross2 className="opacity-60  absolute right-1 top-1 text-xl transition hover:scale-125 hover:opacity-100 cursor-pointer " />
+      <RxCross2 onClick={() => {setAlertShow(false)}} className="opacity-60  absolute right-1 top-1 text-xl transition hover:scale-125 hover:opacity-100 cursor-pointer " />
     </div>
   );
 };
