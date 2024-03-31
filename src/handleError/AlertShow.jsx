@@ -7,7 +7,7 @@ const AlertShow = ({ type, children }) => {
   useEffect(() => {
     const id = setTimeout(() => {
       setAlertShow(false);
-    }, 3 * 1000);
+    }, 4 * 1000);
   }, []);
 
   return (

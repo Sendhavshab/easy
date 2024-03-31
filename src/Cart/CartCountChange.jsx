@@ -3,23 +3,21 @@ import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
 import CustomBTNFour from "../Button/ButtonFour";
 import { AddTocartContext } from "../App";
 import CartItemRemover from "./CartItemRemover";
+import AlertShow from "../handleError/AlertShow";
+import AlertList from "../handleError/AlertList";
 
 const CartCountChange = ({ id, productValue }) => {
   const { handelAddTocart } = useContext(AddTocartContext);
   const [showCartItemAdded, setShowCartItemAdded] = useState(false);
   const [CartInputvalue, setCartInputvalue] = useState(productValue || 1);
 
-  const handelCartProductAdd = useCallback(
-    function () {
+  const handelCartProductAdd = function () {
       handelAddTocart(id, CartInputvalue);
       setShowCartItemAdded(true);
       setTimeout(function () {
         setShowCartItemAdded(false);
       }, 2000);
-    },
-    [CartInputvalue]
-  );
-
+    }
   function HandleInputPlusClick() {
     let changToNum = +(CartInputvalue + 1);
 
@@ -71,9 +69,7 @@ const CartCountChange = ({ id, productValue }) => {
         </CustomBTNFour>
       )}
       {showCartItemAdded && (
-        <p className="bg-black text-slate-50 fixed text-center  right-auto bottom-28 z-20 ">
-          added to cart Successfully!
-        </p>
+        <AlertList howMuch="1" type="success">added to cart Successfully!</AlertList>
       )}
     </div>
   );

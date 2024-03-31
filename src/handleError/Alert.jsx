@@ -29,14 +29,19 @@ const Alert = ({ type, children, setAlertShow }) => {
   const { backgroundColor, Icon } = AlertMap[type];
   return (
     <div
-      className={`opacity-60 flex p-2 m-4 min-h-16 relative  gap-5 hover:scale-105 transition hover:-translate-x-2 hover:opacity-95  w-64 rounded-md shadow-sm shadow-black   ${backgroundColor} `}
+      className={`opacity-70 overflow-hidden z-50 flex p-2 m-4 min-h-20 relative  gap-5 hover:scale-105 transition hover:-translate-x-2 hover:opacity-95  w-64 rounded-md shadow-sm shadow-black   ${backgroundColor} `}
     >
       <Icon className="text-3xl text-white  self-center "></Icon>
       <div>
         <h1 className="text-white text-xl font-bold">{type}</h1>
         <p className="text-white text-sm opacity-85">{children}</p>
       </div>
-      <RxCross2 onClick={() => {setAlertShow(false)}} className="opacity-60  absolute right-1 top-1 text-xl transition hover:scale-125 hover:opacity-100 cursor-pointer " />
+      <RxCross2
+        onClick={() => {
+          setAlertShow(false);
+        }}
+        className="opacity-60  absolute right-1 top-1 text-xl transition hover:scale-125 hover:opacity-100 cursor-pointer "
+      />
     </div>
   );
 };

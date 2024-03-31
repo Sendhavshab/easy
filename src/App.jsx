@@ -14,7 +14,7 @@ import RedirectLogin, { RedirectHome } from "./Redirect";
 import Loader from "./handleError/Loader";
 import Profile from "./Profile";
 import AlertList from "./handleError/AlertList";
- 
+
 export const AddTocartContext = createContext();
 export const UserAccount = createContext();
 function App() {
@@ -23,7 +23,11 @@ function App() {
   const [DataNotFound, SetDataNotFound] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [UserLoading, setUserLoading] = useState(true);
-  const [isAlert, setIsAlert] = useState(0);
+  const [isAlert, setIsAlert] = useState({
+    Alert: 0,
+    message: "Login Error check internet connection",
+    type: "error"
+  });
 
   const jSonFormat = useMemo(function () {
     const localCartNum = localStorage.getItem("my-cart") || "{}";
@@ -64,7 +68,17 @@ function App() {
       .catch((err) => {
         console.log("app me error", err);
         if (err.message === "Network Error") {
-          setIsAlert(isAlert + 1);
+          setIsAlert({
+            Alert: isAlert.Alert + 1,
+            message: "Login Error check internet connection",
+            type: "error",
+          });
+        } else if (err.response.status === 401) {
+           setIsAlert({
+             Alert: isAlert.Alert + 1,
+             message: "Login Error check Email or password",
+             type: "warning",
+           });
         }
         setLoading(false);
       });
@@ -83,7 +97,7 @@ function App() {
       setCartDetail(cart);
     } else {
       const oldValue = doNotPlus ? 0 : cartDetail[productId] || 0;
-      cart = { ...cartDetail, [productId]: oldValue + ProductValue };
+      cart = { ...cartDetail, [productId]: oldValue + +ProductValue };
       setCartDetail(cart);
     }
     const stringFromat = JSON.stringify(cart);
@@ -118,8 +132,8 @@ function App() {
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       {Loading && <Loader></Loader>}
-      <AlertList type="error" howMuch={isAlert}>
-        Login Error check internet connection
+      <AlertList type={isAlert.type} howMuch={isAlert.Alert}>
+        {isAlert.message}
       </AlertList>
       <UserAccount.Provider value={accountObj}>
         <AddTocartContext.Provider value={contextValue}>
