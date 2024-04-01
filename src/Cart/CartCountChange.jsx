@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback, useEffect } from "react";
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
 import CustomBTNFour from "../Button/ButtonFour";
 import { AddTocartContext } from "../App";
@@ -9,15 +9,20 @@ import AlertList from "../handleError/AlertList";
 const CartCountChange = ({ id, productValue }) => {
   const { handelAddTocart } = useContext(AddTocartContext);
   const [showCartItemAdded, setShowCartItemAdded] = useState(false);
-  const [CartInputvalue, setCartInputvalue] = useState(productValue || 1);
+  const [CartInputvalue, setCartInputvalue] = useState();
+ 
+
+  useEffect(() => {
+    setCartInputvalue(productValue || 1);
+  }, [productValue]);
 
   const handelCartProductAdd = function () {
-      handelAddTocart(id, CartInputvalue);
-      setShowCartItemAdded(true);
-      setTimeout(function () {
-        setShowCartItemAdded(false);
-      }, 2000);
-    }
+    handelAddTocart(id, CartInputvalue);
+    setShowCartItemAdded(true);
+    setTimeout(function () {
+      setShowCartItemAdded(false);
+    }, 2000);
+  };
   function HandleInputPlusClick() {
     let changToNum = +(CartInputvalue + 1);
 
@@ -25,7 +30,7 @@ const CartCountChange = ({ id, productValue }) => {
       setCartInputvalue(changToNum);
     }
     if (productValue) {
-      handelAddTocart(id, changToNum , true);
+      handelAddTocart(id, changToNum, true);
     }
   }
   function HandleInputMinusClick() {
@@ -35,10 +40,10 @@ const CartCountChange = ({ id, productValue }) => {
       setCartInputvalue(changToNum);
     }
     if (productValue) {
-      handelAddTocart(id, changToNum , true);
+      handelAddTocart(id, changToNum, true);
     }
   }
- 
+
   return (
     <div>
       <div className="flex items-center justify-center  my-6 ">
@@ -69,7 +74,9 @@ const CartCountChange = ({ id, productValue }) => {
         </CustomBTNFour>
       )}
       {showCartItemAdded && (
-        <AlertList howMuch="1" type="success">added to cart Successfully!</AlertList>
+        <AlertList howMuch="1" type="success">
+          added to cart Successfully!
+        </AlertList>
       )}
     </div>
   );

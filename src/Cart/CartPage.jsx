@@ -43,9 +43,6 @@ function CartPage() {
     [cartDetail]
   );
 
-  if (showLoader) {
-    return <Loader></Loader>;
-  }
   if (DataNotFound) {
     return <NotFoundPage />;
   }
@@ -64,6 +61,7 @@ function CartPage() {
   return (
     // link tag ki to property ko sahi dena he
     <div className="bg-gray-300 py-5">
+{   showLoader &&   <Loader></Loader>}
       <Link to="/">
         <IoMdArrowRoundBack
           size={39}
