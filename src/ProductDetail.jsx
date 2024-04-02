@@ -6,7 +6,6 @@ import { GetOneProduct } from "./ServerData";
 import NextBackBtn from "./NextBackBtn";
 import NotFoundPage from "./handleError/NotFoundPage";
 import Loader from "./handleError/Loader";
-import HelmetMeta from "./Helmet";
 import CartCountChange from "./Cart/CartCountChange";
 
 function ProductDetails() {

@@ -13,13 +13,14 @@ function ProductList({}) {
   const [informSortChanged, SetInformSortChanged] = useState(false);
   useEffect(function () {
     const data = GetProductList();
-
     data
       .then((products) => {
         SetAllItems(products);
+        console.log("error he babua")
       })
       .catch(function () {
         SetDataNotFound(true);
+        console.log("error he babua")
       });
   }, []);
 

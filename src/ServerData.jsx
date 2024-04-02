@@ -1,9 +1,12 @@
 import axios from "axios";
 
 export function GetProductList() {
-  return axios.get("https://dummyjson.com/products").then(function (response) {
-    return response.data.products;
-  });
+  return axios
+    .get("https://myeasykart.codeyogi.io/products")
+    .then(function (response) {
+      console.log("response.data.data", response.data.data);
+      return response.data.data;
+    });
 }
 
 export function GetOneProduct(id) {
@@ -55,7 +58,6 @@ export const accountServerDataSender = (userData) => {
         localStorage.setItem("token", token);
 
         return user;
-      })
-    
+      });
   }
 };

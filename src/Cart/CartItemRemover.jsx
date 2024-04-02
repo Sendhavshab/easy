@@ -12,6 +12,8 @@ const CartItemRemover = ({ id , callByCountChange }) => {
   };
   const InfoYesClick = () => {
     handelAddTocart(id, -1);
+    setPopUp(false);
+    
   };
 
   const InfoNoClick = () => {
