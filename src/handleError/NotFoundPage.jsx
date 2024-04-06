@@ -20,16 +20,15 @@ function NotFoundPage() {
           Sorry this Page can't avalable
         </h1>
         <h1 className="text-4xl font-bold text-gray-900">404</h1>
-
-        {url == "/" ? (
-          <CustomBTNTwo>
-            <a href="/">Reload Again</a>
-          </CustomBTNTwo>
-        ) : (
-          <Link to="/">
-            <CustomBTNthree>GO HOME </CustomBTNthree>
-          </Link>
-        )}
+        <CustomBTNTwo>
+          <a href={url}>Reload Again</a>
+        </CustomBTNTwo>
+        {url ==
+          "/" || (
+            <Link to="/">
+              <CustomBTNthree>GO HOME </CustomBTNthree>
+            </Link>
+          )}
       </div>
     </div>
   );

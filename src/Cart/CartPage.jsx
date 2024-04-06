@@ -15,17 +15,14 @@ function CartPage() {
   const [CartProduct, setCartProduct] = useState([{}]);
   const [showLoader, setShowLoader] = useState(false);
   const [DataNotFound, SetDataNotFound] = useState(false);
-  console.log("cart detail run", cartDetail);
   const key = Object.keys(cartDetail);
 
   useEffect(
     function () {
-      console.log("CartDetail change hui ", cartDetail);
       setShowLoader(true);
       const promises = key.map(function (requestId) {
         return GetOneProduct(requestId);
       });
-      console.log("cartpage rerun");
       let productsPromis = Promise.all(promises);
 
       productsPromis

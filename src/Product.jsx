@@ -1,12 +1,15 @@
-import React , {memo} from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
-function Product({ items }) {
-
+function Product({ items, dummyProduct }) {
   return (
     <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
       <Link to={`/Product/${items.id}/details`} key={items.id}>
         <div className=" w-full aspect-square">
-          <img className="w-full h-full object-cover " src={items.thumbnail} alt={items.title} />
+          <img
+            className="w-full h-full object-cover "
+            src={dummyProduct}
+            alt={items.title}
+          />
         </div>
 
         <h3 className="font-bold text-xs sm:text-base ">
@@ -17,13 +20,11 @@ function Product({ items }) {
           {items.category}
         </p>
         <p className="font-bold text-xs sm:text-base  ">
-          <span className=" text-green-500">price : </span>
-          ${items.price}
+          <span className=" text-green-500">price : </span>${items.price}
         </p>
       </Link>
     </div>
   );
 }
 
-export default memo( Product);
- 
+export default memo(Product);

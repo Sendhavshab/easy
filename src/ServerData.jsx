@@ -1,12 +1,22 @@
 import axios from "axios";
 
 export function GetProductList() {
-  return axios
+
+
+
+  const codeYogiData = axios
     .get("https://myeasykart.codeyogi.io/products")
     .then(function (response) {
-      console.log("response.data.data", response.data.data);
+
       return response.data.data;
     });
+  const dummyData = axios
+    .get("https://dummyjson.com/products/")
+    .then(function (response) {
+      return response.data.products;
+    });
+
+   return {dummyData, codeYogiData}
 }
 
 export function GetOneProduct(id) {
@@ -36,7 +46,6 @@ export const accountServerDataSender = (userData) => {
         password: userData.password,
       })
       .then((response) => {
-        console.log(response.data);
 
         const { token, user } = response.data;
         localStorage.setItem("token", token);
@@ -44,7 +53,6 @@ export const accountServerDataSender = (userData) => {
         return user;
       })
       .catch((error) => {
-        console.log("signup error: " + error);
       });
   } else {
     return axios
@@ -53,7 +61,6 @@ export const accountServerDataSender = (userData) => {
         password: userData.password,
       })
       .then((response) => {
-        console.log(response);
         const { token, user } = response.data;
         localStorage.setItem("token", token);
 

@@ -41,7 +41,6 @@ function App() {
           setUserLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           if (err.message === "Request failed with status code 401") {
             localStorage.removeItem("token");
 
@@ -66,7 +65,6 @@ function App() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log("app me error", err);
         if (err.message === "Network Error") {
           setIsAlert({
             Alert: isAlert.Alert + 1,

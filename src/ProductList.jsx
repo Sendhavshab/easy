@@ -11,17 +11,17 @@ function ProductList({}) {
   const [allItems, SetAllItems] = useState([]);
   const [DataNotFound, SetDataNotFound] = useState(false);
   const [informSortChanged, SetInformSortChanged] = useState(false);
+  const [DummyData , setdummyData] = useState([])
+
+
   useEffect(function () {
-    const data = GetProductList();
-    data
-      .then((products) => {
-        SetAllItems(products);
-        console.log("error he babua")
-      })
-      .catch(function () {
-        SetDataNotFound(true);
-        console.log("error he babua")
-      });
+    const { codeYogiData, dummyData } = GetProductList();
+
+  
+    codeYogiData
+      .then((products) =>  SetAllItems(products)).catch( () => SetDataNotFound(true));
+        dummyData.then((Data) => setdummyData(Data));
+
   }, []);
 
   const param = useMemo(
@@ -103,7 +103,11 @@ function ProductList({}) {
         )}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
-            return <Product items={items} key={index} />;
+          const dummyProduct =  DummyData.filter((p) => p.id == items.id)
+          const b = dummyProduct[0] || param[index]
+            return (
+              <Product items={items} key={index} dummyProduct={b.thumbnail} />
+            );
           })}
         </div>
       </div>
