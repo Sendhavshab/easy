@@ -5,12 +5,12 @@ import placeholderImage from "./placeholder.jpeg"
 
 function Product({ items, dummyProduct }) {
   return (
-    <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
+    <div className="bg-white hover:border-2 hover:border-gray-400 max-w-md p-2 border rounded-md shadow-xl ">
       <Link to={`/Product/${items.id}/details`} key={items.id}>
         <div className=" w-full aspect-square">
           <img
             className="w-full h-full object-cover "
-            src={ dummyProduct || placeholderImage}
+            src={ dummyProduct || items.thubnail}
             alt={items.title}
           />
         </div>

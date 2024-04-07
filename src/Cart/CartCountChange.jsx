@@ -43,7 +43,7 @@ const CartCountChange = ({ id, productValue , handelAddTocart }) => {
   }
 
   return (
-    <div>
+    <div className="text-center  w-full">
       <div className="flex items-center justify-center  my-6 ">
         <button className="m-2">
           {CartInputvalue == 1 && productValue ? (
@@ -65,14 +65,14 @@ const CartCountChange = ({ id, productValue , handelAddTocart }) => {
       {productValue == undefined && (
         <CustomBTNFour
           onClick={handelCartProductAdd}
-          className="rounded-2xl px-2 block  md:inline-block mt-4 md:m-0 "
+          className="rounded-2xl px-2 inline-block"
           disabled={showCartItemAdded}
         >
           Add to cart
         </CustomBTNFour>
       )}
       {showCartItemAdded && (
-        <AlertList howMuch="1" type="success">
+        <AlertList  type="success">
           added to cart Successfully!
         </AlertList>
       )}

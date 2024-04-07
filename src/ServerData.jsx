@@ -1,14 +1,39 @@
 import axios from "axios";
 
-export function GetProductList() {
+export function GetProductList(sort , Quary , page ) {
+
+let params = {}
 
 
+ let sortBy;
 
-  const codeYogiData = axios
-    .get("https://myeasykart.codeyogi.io/products")
+
+     if (sort === "title") {
+         sortBy = "title"
+
+      } else if (sort === "low to high") {
+        sortBy = "price"
+      } else if (sort === "high to low") {
+        sortBy = "price"
+        params.sortType =  "desc"
+        
+      } 
+      if(sortBy){
+params.sortBy = sortBy ;
+      } if(Quary){
+params.search = Quary ;
+      }if(page){
+params.page = page ;
+      }
+   
+  console.log("get run with " , params)
+ const codeYogiData = axios
+    .get("https://myeasykart.codeyogi.io/products" , {
+      params 
+    } )
     .then(function (response) {
 
-      return response.data.data;
+      return response.data;
     });
   const dummyData = axios
     .get("https://dummyjson.com/products/")

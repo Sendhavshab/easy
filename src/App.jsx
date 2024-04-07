@@ -21,19 +21,14 @@ import CartProvider from "./HOC/CartProvider";
 
 
 
-  // export const UserAccountContextHOC  = HocCreater(UserAccount)
 function App() {
   const [Loading, setLoading] = useState(false);
-  // const [isAlert, setIsAlert] = useState({
-  //   Alert: 0,
-  //   message: "Login Error check internet connection",
-  //   type: "error"
-  // });
+
 
   
 
   return (
-    <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
+    <div className="bg-gray-200 ">
       {Loading && <Loader></Loader>}
      
       <UserProvider setLoading={setLoading} >
@@ -63,17 +58,15 @@ function App() {
               <Route
                 index
                 element={
-                  <RedirectLogin>
+                 
                     <ProductList></ProductList>
-                  </RedirectLogin>
+                
                 }
               ></Route>
               <Route
                 path="/Product/:id/details"
                 element={
-                  <RedirectLogin>
                     <ProductDetails />
-                  </RedirectLogin>
                 }
               ></Route>
               <Route

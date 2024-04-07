@@ -7,6 +7,7 @@ import NextBackBtn from "./NextBackBtn";
 import NotFoundPage from "./handleError/NotFoundPage";
 import Loader from "./handleError/Loader";
 import CartCountChange from "./Cart/CartCountChange";
+import PlaceholderProduct from "./PlaceholderProduct";
 
 function ProductDetails() {
   const [product, setProduct] = useState([]);
@@ -31,7 +32,7 @@ function ProductDetails() {
     return <NotFoundPage />;
   }
   if (product.length == 0) {
-    return <Loader arrow></Loader>;
+    return <PlaceholderProduct>   </PlaceholderProduct>;
   }
 
   return (
@@ -45,7 +46,7 @@ function ProductDetails() {
       </Link>
 
       <div
-        className="bg-white p-2 border md:flex min-h-96  rounded-md shadow-xl m-12 lg:m-auto "
+        className="bg-white p-2 border md:flex min-h-96 md:space-x-2  rounded-md shadow-xl m-12 lg:m-auto "
         style={{ maxWidth: "944px" }}
       >
         <div className="overflow-hidden flex  ">
@@ -56,7 +57,7 @@ function ProductDetails() {
           />
         </div>
         <div className="flex flex-col w-96 gap-3 items-start border ">
-          <h3 className="font-bold text-xl  md:text-2xl   lg:text-3xl ">
+          <h3 className="font-bold text-xl max-w-72 lg:max-w-none  md:text-2xl   lg:text-3xl ">
             {product.title}
           </h3>
 

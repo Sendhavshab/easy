@@ -76,7 +76,7 @@ if (UserLoading) {
   }
   return (
          
-  <div> <AlertList type={isAlert.type} howMuch={isAlert.Alert}>
+  <div className=" flex flex-col overflow-auto h-screen"> <AlertList type={isAlert.type} howMuch={isAlert.Alert}>
         {isAlert.message}
       </AlertList>  <UserAccount.Provider value={{
     UserAccountAPICaller,
