@@ -1,25 +1,26 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback, useEffect } from "react";
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
 import CustomBTNFour from "../Button/ButtonFour";
-import { AddTocartContext } from "../App";
 import CartItemRemover from "./CartItemRemover";
+import AlertList from "../handleError/AlertList";
+import { CartProviderHOC } from "../HOC/Context";
 
-const CartCountChange = ({ id, productValue }) => {
-  const { handelAddTocart } = useContext(AddTocartContext);
+const CartCountChange = ({ id, productValue , handelAddTocart }) => {
   const [showCartItemAdded, setShowCartItemAdded] = useState(false);
-  const [CartInputvalue, setCartInputvalue] = useState(productValue || 1);
+  const [CartInputvalue, setCartInputvalue] = useState();
+ 
 
-  const handelCartProductAdd = useCallback(
-    function () {
-      handelAddTocart(id, CartInputvalue);
-      setShowCartItemAdded(true);
-      setTimeout(function () {
-        setShowCartItemAdded(false);
-      }, 2000);
-    },
-    [CartInputvalue]
-  );
+  useEffect(() => {
+    setCartInputvalue(productValue || 1);
+  }, [productValue]);
 
+  const handelCartProductAdd = function () {
+    handelAddTocart(id, CartInputvalue);
+    setShowCartItemAdded(true);
+    setTimeout(function () {
+      setShowCartItemAdded(false);
+    }, 2000);
+  };
   function HandleInputPlusClick() {
     let changToNum = +(CartInputvalue + 1);
 
@@ -27,7 +28,7 @@ const CartCountChange = ({ id, productValue }) => {
       setCartInputvalue(changToNum);
     }
     if (productValue) {
-      handelAddTocart(id, changToNum , true);
+      handelAddTocart(id, changToNum, true);
     }
   }
   function HandleInputMinusClick() {
@@ -37,12 +38,12 @@ const CartCountChange = ({ id, productValue }) => {
       setCartInputvalue(changToNum);
     }
     if (productValue) {
-      handelAddTocart(id, changToNum , true);
+      handelAddTocart(id, changToNum, true);
     }
   }
- 
+
   return (
-    <div>
+    <div className="text-center  w-full">
       <div className="flex items-center justify-center  my-6 ">
         <button className="m-2">
           {CartInputvalue == 1 && productValue ? (
@@ -64,19 +65,19 @@ const CartCountChange = ({ id, productValue }) => {
       {productValue == undefined && (
         <CustomBTNFour
           onClick={handelCartProductAdd}
-          className="rounded-2xl px-2 block  md:inline-block mt-4 md:m-0 "
+          className="rounded-2xl px-2 inline-block"
           disabled={showCartItemAdded}
         >
           Add to cart
         </CustomBTNFour>
       )}
       {showCartItemAdded && (
-        <p className="bg-black text-slate-50 fixed text-center  right-auto bottom-28 z-20 ">
+        <AlertList  type="success">
           added to cart Successfully!
-        </p>
+        </AlertList>
       )}
     </div>
   );
 };
 
-export default CartCountChange;
+export default CartProviderHOC(CartCountChange);

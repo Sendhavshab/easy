@@ -3,12 +3,12 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { FiLoader } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-function Loader(){
+function Loader({arrow}){
  return (
-   <div className=" flex flex-col items-center justify-center">
-     <Link to="/">
+   <div className=" flex cursor-progress fixed bg-black bg-opacity-40 inset-0 flex-col items-center h-screen justify-center">
+    { arrow && <Link to="/">
        <IoMdArrowRoundBack size={39} className="fixed left-3 top-16" />
-     </Link>
+     </Link>}
      <div className="w-screen  flex items-center justify-center">
        <FiLoader className="animate-pulse h-6 w-6" />
      </div>

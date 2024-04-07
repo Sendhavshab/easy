@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { memo } from "react";
 
 const CustomBTNTwo = ({ onClick, children, className }) => {
   return (

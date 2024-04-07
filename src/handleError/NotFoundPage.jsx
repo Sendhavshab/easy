@@ -5,7 +5,7 @@ import CustomBTNthree from "../Button/ButtonThree";
 import CustomBTNTwo from "../Button/Buttontwo";
 function NotFoundPage() {
   const url = window.location.pathname;
-  console.log(url);
+  
   return (
     <div className="flex flex-col max-w-7xl sm:flex-row gap-3 m-4 bg-gray-400 rounded-md  xl:m-auto items-center justify-center">
       <div className="aspect-square">
@@ -20,16 +20,15 @@ function NotFoundPage() {
           Sorry this Page can't avalable
         </h1>
         <h1 className="text-4xl font-bold text-gray-900">404</h1>
-
-        {url == "/" ? (
-          <CustomBTNTwo>
-            <a href="/">Reload Again</a>
-          </CustomBTNTwo>
-        ) : (
-          <Link to="/">
-            <CustomBTNthree>GO HOME </CustomBTNthree>
-          </Link>
-        )}
+        <CustomBTNTwo>
+          <a href={url}>Reload Again</a>
+        </CustomBTNTwo>
+        {url ==
+          "/" || (
+            <Link to="/">
+              <CustomBTNthree>GO HOME </CustomBTNthree>
+            </Link>
+          )}
       </div>
     </div>
   );

@@ -4,10 +4,17 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Input from "../Input";
+import { UserProviderHOC } from "../HOC/Context";
 
-const SignUpPage = () => {
-  function DataServerSender(value) {}
+const SignUpPage = ({UserAccountAPICaller}) => {
 
+
+
+
+  function DataServerSender(value) {
+
+    UserAccountAPICaller(value);
+  }
   const schema = useMemo(function () {
     return Yup.object().shape({
       name: Yup.string().min(4).required(),
@@ -95,4 +102,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default UserProviderHOC(SignUpPage);

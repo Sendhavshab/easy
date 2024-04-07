@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 function HelmetMeta(param){
 
   const url = window.location.href
-  console.log(url, 'url is ') 
 return (
   <Helmet>
     <title>{"EasyKart - " + param.category}</title>

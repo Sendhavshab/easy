@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Form, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Input from "../Input";
+import { UserAccount, UserProviderHOC } from "../HOC/Context";
 
-const LogInPage = () => {
+const LogInPage = ( { UserAccountAPICaller } ) => {
+
+  
+
   const DataServerSender = (values) => {
-    console.log("name is", values.name, "passwords is", values.password);
+    UserAccountAPICaller(values);
   };
 
   const schema = Yup.object().shape({
@@ -37,7 +41,7 @@ const LogInPage = () => {
       >
         <Form>
           <div className="bg-indigo-950 p-6 rounded-lg flex max-w-72 flex-col gap-4">
-            <h2 className="text-xl font-bold text-white opacity-40">
+            <h2 className="text-xl text-center font-bold text-white opacity-40">
               Welcome back to AnkiKart
             </h2>
 
@@ -65,7 +69,7 @@ const LogInPage = () => {
               type="submit"
               className="bg-blue-500 text-white rounded-full hover:bg-blue-400 font-bold px-4 py-2 disabled:bg-blue-300 disabled:text-gray-200"
             >
-              Sign In
+              Log In
             </button>
             <p className="font-bold text-white">
               Don't have an account{" "}
@@ -80,4 +84,4 @@ const LogInPage = () => {
   );
 };
 
-export default LogInPage;
+export default UserProviderHOC(LogInPage);

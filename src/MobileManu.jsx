@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useContext, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { GoHomeFill } from "react-icons/go";
 import { Link } from "react-router-dom";
@@ -6,13 +6,30 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { MdAccountCircle } from "react-icons/md";
 import { BsCartPlus } from "react-icons/bs";
+import { AddTocartContext, CartProviderHOC, UserAccount, UserProviderHOC } from "./HOC/Context";
+import { FaUserCircle } from "react-icons/fa";
+// import { UserAccountContextHOC } from "./App";
 
-function MobileManu({ ProductsValue }) {
+
+function MobileManu({user , cartProductsValue}) {
+
   const [showManu, setShowManu] = useState(false);
 
   function ManuOpenerClick() {
     setShowManu(!showManu);
   }
+ let Account = {
+   to: "/login",
+   children: "LOGIN",
+   Icon: MdAccountCircle,
+ };
+if(user){
+  Account = {
+    to: "/myprofile",
+    children: "PROFILE",
+    Icon: FaUserCircle,
+  };
+}
 
   return (
     <div className="w-full py-2  bg-white md:hidden min-h-14 relative ">
@@ -34,12 +51,12 @@ function MobileManu({ ProductsValue }) {
                   HOME
                 </Link>
                 <Link
-                  to="/login"
+                  to={Account.to}
                   onClick={ManuOpenerClick}
                   className="py-3  border-b-4 "
                 >
-                  <MdAccountCircle className="inline-block mr-2" />
-                  LOGIN
+                  <Account.Icon className="inline-block mr-2" />
+                  {Account.children}
                 </Link>
                 <Link
                   to="/mycart"
@@ -71,7 +88,7 @@ function MobileManu({ ProductsValue }) {
         <Link className="absolute right-2 mr-5  inline-block" to="/mycart">
           <BsCartPlus size={34} title="Cart" className="" />
           <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
-            {ProductsValue}
+            {cartProductsValue}
           </p>
         </Link>
       </div>
@@ -79,4 +96,4 @@ function MobileManu({ ProductsValue }) {
   );
 }
 
-export default memo(MobileManu);
+export default UserProviderHOC(memo(CartProviderHOC(MobileManu)));

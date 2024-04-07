@@ -8,24 +8,20 @@ import { Link } from "react-router-dom";
 import Loader from "../handleError/Loader";
 import CartCountChange from "./CartCountChange";
 import CartItemRemover from "./CartItemRemover";
-import { AddTocartContext } from "../App";
+import { AddTocartContext, CartProviderHOC } from "../HOC/Context";
 
-function CartPage() {
-  const { cartDetail } = useContext(AddTocartContext);
+function CartPage({ cartDetail }) {
   const [CartProduct, setCartProduct] = useState([{}]);
   const [showLoader, setShowLoader] = useState(false);
   const [DataNotFound, SetDataNotFound] = useState(false);
-  console.log("cart detail run", cartDetail);
   const key = Object.keys(cartDetail);
 
   useEffect(
     function () {
-      console.log("CartDetail change hui ", cartDetail);
       setShowLoader(true);
       const promises = key.map(function (requestId) {
         return GetOneProduct(requestId);
       });
-      console.log("cartpage rerun");
       let productsPromis = Promise.all(promises);
 
       productsPromis
@@ -43,9 +39,6 @@ function CartPage() {
     [cartDetail]
   );
 
-  if (showLoader) {
-    return <Loader></Loader>;
-  }
   if (DataNotFound) {
     return <NotFoundPage />;
   }
@@ -64,6 +57,7 @@ function CartPage() {
   return (
     // link tag ki to property ko sahi dena he
     <div className="bg-gray-300 py-5">
+{   showLoader &&   <Loader></Loader>}
       <Link to="/">
         <IoMdArrowRoundBack
           size={39}
@@ -127,4 +121,4 @@ function CartPage() {
     </div>
   );
 }
-export default CartPage;
+export default CartProviderHOC(CartPage);
