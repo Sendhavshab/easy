@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { AddTocartContext } from "../App";
 import { GiCrossMark } from "react-icons/gi";
 import { TiDeleteOutline } from "react-icons/ti";
+import { AddTocartContext } from "../HOC/Context";
 
 const CartItemRemover = ({ id , callByCountChange }) => {
   const { handelAddTocart } = useContext(AddTocartContext);

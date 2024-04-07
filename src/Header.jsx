@@ -1,10 +1,11 @@
 import React, { memo, useContext } from "react";
+// import { UserAccountContextHOC } from "./App";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { UserAccount } from "./App";
+ 
 import { FaUserCircle } from "react-icons/fa";
-function Header({ ProductsValue }) {
-  const { user } = useContext(UserAccount);
+import {  CartProviderHOC, UserProviderHOC } from "./HOC/Context";
+function Header({user , cartProductsValue}) {
   return (
     <div className="w-full bg-white mb-10 hidden md:block">
       <div className="max-w-7xl lg:m-auto flex md:h-16 justify-between items-center">
@@ -23,7 +24,7 @@ function Header({ ProductsValue }) {
           >
             <BsCartPlus size={34} title="Cart" className="  " />
             <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
-              {ProductsValue}
+              {cartProductsValue}
             </p>
           </Link>
           {user ? (
@@ -49,4 +50,4 @@ function Header({ ProductsValue }) {
     </div>
   );
 }
-export default memo(Header);
+export default UserProviderHOC(CartProviderHOC( memo(Header)));

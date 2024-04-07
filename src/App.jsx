@@ -14,133 +14,36 @@ import RedirectLogin, { RedirectHome } from "./Redirect";
 import Loader from "./handleError/Loader";
 import Profile from "./Profile";
 import AlertList from "./handleError/AlertList";
+import { AddTocartContext, UserAccount } from "./HOC/Context";
+import HocCreater from "./HOC/HocCreater";
+import UserProvider from "./HOC/UserProvider";
+import CartProvider from "./HOC/CartProvider";
 
-export const AddTocartContext = createContext();
-export const UserAccount = createContext();
+
+
+  // export const UserAccountContextHOC  = HocCreater(UserAccount)
 function App() {
-  const token = localStorage.getItem("token");
-  const [user, setUser] = useState(null);
-  const [DataNotFound, SetDataNotFound] = useState(false);
   const [Loading, setLoading] = useState(false);
-  const [UserLoading, setUserLoading] = useState(true);
-  const [isAlert, setIsAlert] = useState({
-    Alert: 0,
-    message: "Login Error check internet connection",
-    type: "error"
-  });
+  // const [isAlert, setIsAlert] = useState({
+  //   Alert: 0,
+  //   message: "Login Error check internet connection",
+  //   type: "error"
+  // });
 
-  const jSonFormat = useMemo(function () {
-    const localCartNum = localStorage.getItem("my-cart") || "{}";
-    return JSON.parse(localCartNum);
-  });
-  useEffect(() => {
-    if (token) {
-      GetUser(token)
-        .then((responce) => {
-          setUser(responce.data);
-          setUserLoading(false);
-        })
-        .catch((err) => {
-          if (err.message === "Request failed with status code 401") {
-            localStorage.removeItem("token");
+  
 
-            setUserLoading(false);
-          } else if (err.message === "Network Error") {
-            SetDataNotFound(true);
-          }
-        });
-    } else {
-      setUserLoading(false);
-    }
-  }, []);
-
-  const [cartDetail, setCartDetail] = useState(jSonFormat);
-
-  const UserAccountAPICaller = (userData) => {
-    setLoading(true);
-    accountServerDataSender(userData)
-      .then((responce) => {
-        const user = responce;
-        setUser(user);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err.message === "Network Error") {
-          setIsAlert({
-            Alert: isAlert.Alert + 1,
-            message: "Login Error check internet connection",
-            type: "error",
-          });
-        } else if (err.response.status === 401) {
-           setIsAlert({
-             Alert: isAlert.Alert + 1,
-             message: "Login Error check Email or password",
-             type: "warning",
-           });
-        }
-        setLoading(false);
-      });
-  };
-  const accountObj = {
-    UserAccountAPICaller,
-    user,
-    setUser,
-  };
-
-  function handelAddTocart(productId, ProductValue, doNotPlus) {
-    let cart;
-    if (ProductValue === -1) {
-      cart = { ...cartDetail };
-      delete cart[productId];
-      setCartDetail(cart);
-    } else {
-      const oldValue = doNotPlus ? 0 : cartDetail[productId] || 0;
-      cart = { ...cartDetail, [productId]: oldValue + +ProductValue };
-      setCartDetail(cart);
-    }
-    const stringFromat = JSON.stringify(cart);
-    localStorage.setItem("my-cart", stringFromat);
-  }
-
-  const cartProductsValue = useMemo(
-    function () {
-      const a = Object.keys(cartDetail).reduce(function (result, key) {
-        return cartDetail[key] + result;
-      }, 0);
-      return a;
-    },
-    [cartDetail]
-  );
-
-  const contextValue = useMemo(
-    () => ({
-      cartDetail,
-      handelAddTocart,
-    }),
-    [cartDetail, handelAddTocart]
-  );
-
-  if (DataNotFound) {
-    return <NotFoundPage />;
-  }
-
-  if (UserLoading) {
-    return <Loader></Loader>;
-  }
   return (
     <div className="bg-gray-200 h-screen overflow-auto flex flex-col">
       {Loading && <Loader></Loader>}
-      <AlertList type={isAlert.type} howMuch={isAlert.Alert}>
-        {isAlert.message}
-      </AlertList>
-      <UserAccount.Provider value={accountObj}>
-        <AddTocartContext.Provider value={contextValue}>
-          <Header ProductsValue={cartProductsValue}></Header>
+     
+      <UserProvider setLoading={setLoading} >
+        <CartProvider>
+          <Header></Header>
 
-          <MobileManu ProductsValue={cartProductsValue}></MobileManu>
+          <MobileManu ></MobileManu>
 
           <div className="grow ">
-            <Routes>
+          <Routes>
               <Route
                 path="/login"
                 element={
@@ -178,7 +81,7 @@ function App() {
                 element={
                   <RedirectLogin>
                     {" "}
-                    <CartPage cartDetail={cartDetail} />
+                    <CartPage />
                   </RedirectLogin>
                 }
               />
@@ -187,8 +90,8 @@ function App() {
             </Routes>
           </div>
           <Footer />
-        </AddTocartContext.Provider>
-      </UserAccount.Provider>
+        </CartProvider>
+      </UserProvider>
     </div>
   );
 }

@@ -104,7 +104,7 @@ function ProductList({}) {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5   py-6 px-5 ">
           {param.map(function (items, index) {
           const dummyProduct =  DummyData.filter((p) => p.id == items.id)
-          const b = dummyProduct[0] || param[index]
+          const b = dummyProduct[0] || false
             return (
               <Product items={items} key={index} dummyProduct={b.thumbnail} />
             );

@@ -8,10 +8,9 @@ import { Link } from "react-router-dom";
 import Loader from "../handleError/Loader";
 import CartCountChange from "./CartCountChange";
 import CartItemRemover from "./CartItemRemover";
-import { AddTocartContext } from "../App";
+import { AddTocartContext, CartProviderHOC } from "../HOC/Context";
 
-function CartPage() {
-  const { cartDetail } = useContext(AddTocartContext);
+function CartPage({ cartDetail }) {
   const [CartProduct, setCartProduct] = useState([{}]);
   const [showLoader, setShowLoader] = useState(false);
   const [DataNotFound, SetDataNotFound] = useState(false);
@@ -122,4 +121,4 @@ function CartPage() {
     </div>
   );
 }
-export default CartPage;
+export default CartProviderHOC(CartPage);

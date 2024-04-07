@@ -4,12 +4,11 @@ import { Form, Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Input from "../Input";
-import { UserAccount } from "../App";
+import { UserAccount, UserProviderHOC } from "../HOC/Context";
 
-const LogInPage = () => {
+const LogInPage = ( { UserAccountAPICaller } ) => {
 
   
- const { UserAccountAPICaller } = useContext(UserAccount);
 
   const DataServerSender = (values) => {
     UserAccountAPICaller(values);
@@ -85,4 +84,4 @@ const LogInPage = () => {
   );
 };
 
-export default LogInPage;
+export default UserProviderHOC(LogInPage);

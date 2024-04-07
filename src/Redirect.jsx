@@ -1,22 +1,23 @@
-import React, { useContext } from "react";
-import { UserAccount } from "./App";
+import React from "react";
 import { Navigate } from "react-router-dom";
+// import { UserAccountContextHOC } from "./App";
+import {  UserProviderHOC } from "./HOC/Context";
 
-const RedirectLogin = ({ children }) => {
-  const { user } = useContext(UserAccount);
+const RedirectLogin = ({ children ,user  }) => {
   if (!user) {
     return <Navigate to="/login" />;
   }
   return <>{children}</>;
 };
 
-export default RedirectLogin;
+export default UserProviderHOC(RedirectLogin);
 
-export const RedirectHome = ({ children }) => {
-  const { user } = useContext(UserAccount);
+const p = ({ children  , user}) => {
 
   if (user) {
     return <Navigate to="/" />;
   }
   return <>{children}</>;
 };
+
+  export const RedirectHome   =  UserProviderHOC(p) ;

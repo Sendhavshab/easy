@@ -1,5 +1,8 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
+import placeholderImage from "./placeholder.jpeg"
+
+
 function Product({ items, dummyProduct }) {
   return (
     <div className="bg-white  max-w-md p-2 border rounded-md shadow-xl ">
@@ -7,7 +10,7 @@ function Product({ items, dummyProduct }) {
         <div className=" w-full aspect-square">
           <img
             className="w-full h-full object-cover "
-            src={dummyProduct}
+            src={ dummyProduct || placeholderImage}
             alt={items.title}
           />
         </div>

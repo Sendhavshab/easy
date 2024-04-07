@@ -1,15 +1,14 @@
 import { Form, Formik, useFormik } from "formik";
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Input from "../Input";
-import { UserAccount } from "../App";
+import { UserProviderHOC } from "../HOC/Context";
 
-const SignUpPage = () => {
+const SignUpPage = ({UserAccountAPICaller}) => {
 
 
- const {UserAccountAPICaller} = useContext(UserAccount)
 
 
   function DataServerSender(value) {
@@ -103,4 +102,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default UserProviderHOC(SignUpPage);

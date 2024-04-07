@@ -6,13 +6,15 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { MdAccountCircle } from "react-icons/md";
 import { BsCartPlus } from "react-icons/bs";
-import { UserAccount } from "./App";
+import { AddTocartContext, CartProviderHOC, UserAccount, UserProviderHOC } from "./HOC/Context";
 import { FaUserCircle } from "react-icons/fa";
+// import { UserAccountContextHOC } from "./App";
 
-function MobileManu({ ProductsValue }) {
+
+function MobileManu({user , cartProductsValue}) {
+
   const [showManu, setShowManu] = useState(false);
 
-  const { user } = useContext(UserAccount);
   function ManuOpenerClick() {
     setShowManu(!showManu);
   }
@@ -86,7 +88,7 @@ if(user){
         <Link className="absolute right-2 mr-5  inline-block" to="/mycart">
           <BsCartPlus size={34} title="Cart" className="" />
           <p className="absolute -top-4 font-bold size-6 bg-green-400 rounded-full text-center px-1 -right-2">
-            {ProductsValue}
+            {cartProductsValue}
           </p>
         </Link>
       </div>
@@ -94,4 +96,4 @@ if(user){
   );
 }
 
-export default memo(MobileManu);
+export default UserProviderHOC(memo(CartProviderHOC(MobileManu)));

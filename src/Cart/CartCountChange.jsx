@@ -1,13 +1,11 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
 import CustomBTNFour from "../Button/ButtonFour";
-import { AddTocartContext } from "../App";
 import CartItemRemover from "./CartItemRemover";
-import AlertShow from "../handleError/AlertShow";
 import AlertList from "../handleError/AlertList";
+import { CartProviderHOC } from "../HOC/Context";
 
-const CartCountChange = ({ id, productValue }) => {
-  const { handelAddTocart } = useContext(AddTocartContext);
+const CartCountChange = ({ id, productValue , handelAddTocart }) => {
   const [showCartItemAdded, setShowCartItemAdded] = useState(false);
   const [CartInputvalue, setCartInputvalue] = useState();
  
@@ -82,4 +80,4 @@ const CartCountChange = ({ id, productValue }) => {
   );
 };
 
-export default CartCountChange;
+export default CartProviderHOC(CartCountChange);
